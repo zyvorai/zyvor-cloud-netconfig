@@ -8,58 +8,47 @@
   Build: ./docs/social/build-hero-dark.sh  ->  cloud-netconfig-hero-dark.jpg (2400x1260)
 -->
 <style>
-  :root { --blue:#0071e3; --signal:#2997ff; --cyan:#64d2ff; --green:#30d158; --amber:#ff9f0a;
+  :root { --blue:#0071e3; --signal:#2997ff; --cyan:#64d2ff; --green:#30d158; --amber:#ff9f0a; --red:#ff453a; --violet:#bf5af2;
     --sans:'SF Pro Display','Helvetica Neue',Helvetica,Arial,sans-serif; --mono:'SF Mono',Menlo,Consolas,monospace; }
   * { box-sizing:border-box; }
   html,body { margin:0; padding:0; }
   body { width:1200px; height:630px; overflow:hidden; color:#f5f5f7; font-family:var(--sans); position:relative; background:#000; }
   .aurora { position:absolute; inset:0;
-    background:radial-gradient(720px 460px at 80% 16%, rgba(41,151,255,.40), transparent 62%),
-               radial-gradient(600px 420px at 104% 98%, rgba(100,210,255,.20), transparent 60%),
+    background:radial-gradient(720px 460px at 80% 16%, rgba(41,151,255,.34), transparent 62%),
+               radial-gradient(600px 420px at 104% 98%, rgba(100,210,255,.16), transparent 60%),
                radial-gradient(520px 380px at 6% 110%, rgba(0,113,227,.28), transparent 60%); }
-  .grid { position:absolute; inset:0; opacity:.09;
-    background-image:linear-gradient(rgba(120,180,255,.9) 1px,transparent 1px),linear-gradient(90deg,rgba(120,180,255,.9) 1px,transparent 1px);
-    background-size:44px 44px; -webkit-mask-image:radial-gradient(900px 520px at 72% 42%, #000 18%, transparent 75%); }
-  .left { position:absolute; left:60px; top:52px; width:560px; z-index:3; }
+  .copy { position:absolute; left:60px; top:52px; width:560px; z-index:3; }
   .brand { display:flex; align-items:center; gap:12px; font-family:var(--mono); font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#a1a1a6; }
   .brand b { color:#fff; }
   .word { margin:20px 0 0; font-size:64px; line-height:.95; font-weight:800; letter-spacing:-.05em; white-space:nowrap;
     background:linear-gradient(92deg,#fff 0%,#e3f0ff 38%,var(--signal) 74%,var(--cyan) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:6px; }
   .tag { margin:14px 0 0; font-size:31px; line-height:1.15; font-weight:700; letter-spacing:-.02em; }
   .tag em { font-style:normal; color:var(--signal); }
-  .lede { margin:12px 0 0; font-size:18px; line-height:1.45; color:#b8b8bf; width:520px; }
+  .lede { margin:12px 0 0; font-size:18px; line-height:1.45; color:#b8b8bf; width:520px; text-shadow:0 1px 12px #000; }
   .stats { margin-top:24px; display:flex; gap:32px; }
   .stat b { display:block; font-size:34px; font-weight:800; letter-spacing:-.03em; color:#fff; }
   .stat span { font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#8e8e93; }
   .pill { position:absolute; left:60px; bottom:40px; display:flex; gap:10px; z-index:3; }
-  .pill span { font-family:var(--mono); font-size:13.5px; font-weight:700; padding:7px 13px; border-radius:18px; border:1.5px solid rgba(255,255,255,.2); color:#e5e5ea; background:rgba(255,255,255,.04); }
+  .pill span { font-family:var(--mono); font-size:13.5px; font-weight:700; padding:7px 13px; border-radius:18px; border:1.5px solid rgba(255,255,255,.2); color:#e5e5ea; background:rgba(0,0,0,.6); }
   .pill span.b { background:var(--blue); border-color:var(--blue); color:#fff; box-shadow:0 0 24px rgba(0,113,227,.55); }
-
-  .right { position:absolute; left:652px; top:96px; width:560px; z-index:2; }
-  .win { position:relative; width:560px; border-radius:16px; overflow:hidden; z-index:2;
-    background:linear-gradient(180deg, rgba(22,24,30,.94), rgba(10,11,14,.96));
-    box-shadow:0 50px 100px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.14), 0 0 90px rgba(41,151,255,.22);
-    transform:perspective(1600px) rotateY(-14deg) rotateX(4deg); transform-origin:left center; }
-  .bar { height:34px; display:flex; align-items:center; gap:8px; padding:0 14px; background:rgba(255,255,255,.05); border-bottom:1px solid rgba(255,255,255,.07); }
-  .bar i { width:11px; height:11px; border-radius:50%; background:#ff5f57; } .bar i:nth-child(2){background:#febc2e} .bar i:nth-child(3){background:#28c840}
-  .bar em { margin-left:auto; margin-right:auto; font-style:normal; font-family:var(--mono); font-size:12px; color:#8e8e93; transform:translateX(-24px); }
-  .term { min-height:214px; padding:20px 22px 24px; font-family:var(--mono); font-size:15.5px; line-height:1.75; }
-  .l { white-space:pre; overflow:hidden; text-overflow:ellipsis; color:#f5f5f7; }
-  .l .p { color:var(--signal); font-weight:700; }
-  .l.out { color:#a1a1a6; }
-  .l.cm { color:#6e6e73; }
-  .l.ok { color:#d1f7dc; } .l.ok span { color:var(--green); font-weight:700; }
-  .l.warn { color:#ffe1b0; } .l.warn span { color:var(--amber); font-weight:700; }
-  .cur { display:inline-block; width:9px; height:18px; background:var(--signal); vertical-align:-3px; box-shadow:0 0 12px var(--signal); }
-  .chips { margin:34px 0 0 38px; width:480px; display:flex; flex-wrap:wrap; gap:10px; position:relative; z-index:3; }
-  .chips span { font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:.04em; padding:7px 12px; border-radius:14px;
-    color:#cfe6ff; background:rgba(10,20,35,.82); border:1px solid rgba(41,151,255,.45); box-shadow:0 0 18px rgba(41,151,255,.18); }
+  .art { position:absolute; left:520px; top:0; width:680px; height:630px; z-index:2; }
+  .art svg { display:block; }
+  #labels { position:absolute; inset:0; z-index:4; pointer-events:none; }
+  .lbl { position:absolute; font-family:var(--mono); font-size:12.5px; color:#a1a1a6; text-align:center; transform:translate(-50%,-50%); white-space:nowrap; }
+  .lbl b { display:block; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#e5e5ea; }
+  .lbl span { display:block; margin-top:3px; }
+  .lbl.box { padding:7px 12px; border-radius:12px; background:rgba(8,10,14,.85); border:1px solid rgba(255,255,255,.14); }
+  .lbl.chip { padding:6px 11px; border-radius:13px; font-size:12.5px; font-weight:700; color:#cfe6ff; background:rgba(10,20,35,.85); border:1px solid rgba(41,151,255,.5); box-shadow:0 0 16px rgba(41,151,255,.2); }
+  .lbl.left { transform:translate(0,-50%); text-align:left; }
+  .lbl.right { transform:translate(-100%,-50%); text-align:right; }
+  .ok { color:var(--green) !important; } .warn { color:var(--amber) !important; } .bad { color:var(--red) !important; } .sig { color:var(--signal) !important; } .cy { color:var(--cyan) !important; } .vi { color:var(--violet) !important; }
 </style>
 </head>
 <body>
 <div class="aurora"></div>
-<div class="grid"></div>
-<div class="left">
+<div class="art"><svg id="art" width="680" height="630" viewBox="0 0 680 630" xmlns="http://www.w3.org/2000/svg"></svg></div>
+<div id="labels"></div>
+<div class="copy">
   <div class="brand"><svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><defs><linearGradient id="zb" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff5a15"/><stop offset="1" stop-color="#cc420a"/></linearGradient></defs><rect width="64" height="64" rx="15" fill="url(#zb)"/><path d="M18.5,20.5 45.5,20.5 18.5,43.5 45.5,43.5" fill="none" stroke="#fff" stroke-width="8.3" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Zyvor</b><span>&middot;</span><span>Multi-cloud Linux networking</span></div>
   <div class="word">cloud-netconfig</div>
   <div class="tag">Secondary IPs and routes.<br><em>Configured from metadata.</em></div>
@@ -67,8 +56,100 @@
   <div class="stats"><div class="stat"><b>3</b><span>metadata clients</span></div><div class="stat"><b>2</b><span>binaries</span></div><div class="stat"><b>Rust</b><span>netlink native</span></div></div>
 </div>
 <div class="pill"><span class="b">github.com/zyvorai/zyvor-cloud-netconfig</span><span>Apache-2.0</span></div>
-<div class="right"><div class="win"><div class="bar"><i></i><i></i><i></i><em>cnctl</em></div>
-<div class="term"><div class="l"><span class="p">$</span> sudo systemctl enable --now cloud-netconfigd</div><div class="l"><span class="p">$</span> cnctl status system</div><div class="l ok"><span>&#10003;</span> Cloud Provider: azure</div><div class="l"><span class="p">$</span> cnctl status network</div><div class="l out">       Name: eth1</div><div class="l out"> Private IP: 10.0.1.5</div><div class="l"><span class="p">$</span> <i class="cur"></i></div></div></div>
-<div class="chips"><span>Rust</span><span>netlink</span><span>Azure</span><span>AWS EC2</span><span>GCP</span><span>systemd</span></div></div>
+<script>
+var Z = (function () {
+  var NS = 'http://www.w3.org/2000/svg', svg = document.getElementById('art'), labels = document.getElementById('labels');
+  var seed = 20261004;
+  function rnd() { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }
+  function el(tag, a, parent) { var n = document.createElementNS(NS, tag); for (var k in a) n.setAttribute(k, a[k]); (parent || svg).appendChild(n); return n; }
+  function g(attrs) { return el('g', attrs || {}); }
+  function label(x, y, inner, cls, style) { var d = document.createElement('div'); d.className = 'lbl ' + (cls || ''); d.style.left = (520 + x) + 'px'; d.style.top = y + 'px'; if (style) d.setAttribute('style', d.getAttribute('style') + ';' + style); d.innerHTML = inner; labels.appendChild(d); return d; }
+  return { NS: NS, svg: svg, W: 680, H: 630, rnd: rnd, el: el, g: g, label: label,
+    reseed: function (s) { seed = s; },
+    c: { blue: '#0071e3', signal: '#2997ff', cyan: '#64d2ff', green: '#30d158', amber: '#ff9f0a', red: '#ff453a', violet: '#bf5af2', teal: '#40c8e0', indigo: '#5e5ce6', pink: '#ff375f', white: '#f5f5f7', grey: '#8e8e93' } };
+})();
+(function () {
+// cloud-netconfig: a multi-NIC VM under the cloud metadata endpoint (169.254.169.254).
+// Dashed metadata drops land on each NIC port; each NIC leaves the VM on its own glowing policy-routing lane.
+var C = Z.c;
+var defs = Z.el('defs', {});
+defs.innerHTML = '<filter id="cnGl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+  '<filter id="cnSf" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>' +
+  '<linearGradient id="cnVm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f2748"/><stop offset="1" stop-color="#060d18"/></linearGradient>' +
+  '<linearGradient id="cnCl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16365e"/><stop offset="1" stop-color="#0a1a30"/></linearGradient>';
+
+// faint dotted backplane
+for (var gx = 110; gx <= 650; gx += 22) for (var gy = 30; gy <= 600; gy += 22) {
+  if (Z.rnd() < 0.55) continue;
+  Z.el('circle', { cx: gx, cy: gy, r: .9, fill: '#7fb6ff', opacity: (0.06 + Z.rnd() * 0.1).toFixed(2) });
+}
+
+var nics = [
+  { n: 'eth0', x: 236, col: '#5e7fa8', laneY: 540, dim: 1 },
+  { n: 'eth1', x: 384, col: C.cyan, laneY: 488 },
+  { n: 'eth2', x: 532, col: C.teal, laneY: 436 }
+];
+var vmX = 150, vmY = 262, vmW = 468, vmH = 100;
+
+// cloud metadata endpoint
+var mx = 384, my = 112;
+Z.el('ellipse', { cx: mx, cy: my, rx: 150, ry: 60, fill: '#2997ff', opacity: .22, filter: 'url(#cnSf)' });
+var cloud = 'M' + (mx - 104) + ',' + (my + 34) + ' A30,30 0 0 1 ' + (mx - 80) + ',' + (my - 14) + ' A46,46 0 0 1 ' + (mx - 6) + ',' + (my - 44) +
+  ' A42,42 0 0 1 ' + (mx + 70) + ',' + (my - 16) + ' A30,30 0 0 1 ' + (mx + 104) + ',' + (my + 34) + ' Z';
+Z.el('path', { d: cloud, fill: 'url(#cnCl)', stroke: C.signal, 'stroke-width': 1.6, filter: 'url(#cnGl)' });
+Z.label(mx, my + 10, '<b style="letter-spacing:.06em">169.254.169.254</b><span>instance metadata</span>');
+
+// metadata drops to each NIC
+nics.forEach(function (n, k) {
+  var sx = mx + (k - 1) * 46, sy = my + 34, ey = vmY - 14;
+  var d = 'M' + sx + ',' + sy + ' C' + sx + ',' + (sy + 50) + ' ' + n.x + ',' + (ey - 50) + ' ' + n.x + ',' + ey;
+  Z.el('path', { d: d, fill: 'none', stroke: '#cfe6ff', 'stroke-width': 1.3, 'stroke-dasharray': '4 5', opacity: .6 });
+  var tp = Z.el('path', { d: d, fill: 'none', stroke: 'none' }), L = tp.getTotalLength(), q = tp.getPointAtLength(L * 0.55);
+  Z.el('rect', { x: q.x - 9, y: q.y - 5, width: 18, height: 10, rx: 3, fill: '#0a1a30', stroke: n.dim ? '#8fbfff' : n.col, 'stroke-width': 1, filter: 'url(#cnGl)' });
+  Z.el('line', { x1: q.x - 5, y1: q.y, x2: q.x + 5, y2: q.y, stroke: n.dim ? '#8fbfff' : n.col, 'stroke-width': 1.2 });
+});
+
+// policy routing lanes (drawn before the VM so they emerge from its bottom edge)
+nics.forEach(function (n) {
+  var y0 = vmY + vmH - 6, r = 26;
+  var d = 'M' + n.x + ',' + y0 + ' L' + n.x + ',' + (n.laneY - r) + ' Q' + n.x + ',' + n.laneY + ' ' + (n.x + r) + ',' + n.laneY + ' L' + 640 + ',' + n.laneY;
+  Z.el('path', { d: d, fill: 'none', stroke: n.col, 'stroke-width': 16, 'stroke-linecap': 'round', opacity: n.dim ? .06 : .14 });
+  Z.el('path', { d: d, fill: 'none', stroke: n.col, 'stroke-width': n.dim ? 1.4 : 2.4, opacity: n.dim ? .5 : .95, filter: n.dim ? null : 'url(#cnGl)' });
+  var tp = Z.el('path', { d: d, fill: 'none', stroke: 'none' }), L = tp.getTotalLength();
+  for (var f = 0.18; f < 0.98; f += 0.11) {
+    var q = tp.getPointAtLength(L * f), q2 = tp.getPointAtLength(L * f + 1), ang = Math.atan2(q2.y - q.y, q2.x - q.x) * 180 / Math.PI;
+    Z.el('path', { d: 'M-3,-4 L2,0 L-3,4', transform: 'translate(' + q.x.toFixed(1) + ',' + q.y.toFixed(1) + ') rotate(' + ang.toFixed(1) + ')', fill: 'none', stroke: '#fff', 'stroke-width': 1.2, opacity: n.dim ? .25 : .7 });
+  }
+  Z.el('circle', { cx: 640, cy: n.laneY, r: 3.5, fill: n.dim ? '#8fbfff' : '#fff', filter: 'url(#cnGl)' });
+});
+
+// VM chassis
+Z.el('rect', { x: vmX, y: vmY, width: vmW, height: vmH, rx: 18, fill: 'url(#cnVm)', stroke: 'rgba(120,185,255,.55)', 'stroke-width': 1.4 });
+Z.el('rect', { x: vmX + 6, y: vmY + 6, width: vmW - 12, height: vmH - 12, rx: 13, fill: 'none', stroke: 'rgba(120,185,255,.12)' });
+// internal bus from daemon to each NIC
+var busY = vmY + 58;
+Z.el('line', { x1: nics[0].x, y1: busY, x2: nics[2].x, y2: busY, stroke: 'rgba(100,210,255,.35)', 'stroke-width': 1.2 });
+nics.forEach(function (n) {
+  Z.el('line', { x1: n.x, y1: vmY + 12, x2: n.x, y2: vmY + vmH - 6, stroke: n.col, 'stroke-width': 1.2, opacity: n.dim ? .35 : .7 });
+  Z.el('circle', { cx: n.x, cy: busY, r: 3, fill: n.dim ? '#8fbfff' : n.col });
+});
+// NIC ports on the top edge
+nics.forEach(function (n) {
+  var g = Z.g({ transform: 'translate(' + n.x + ',' + vmY + ')' });
+  Z.el('rect', { x: -30, y: -14, width: 60, height: 28, rx: 6, fill: '#08121f', stroke: n.dim ? '#8fbfff' : n.col, 'stroke-width': 1.6, filter: n.dim ? null : 'url(#cnGl)' }, g);
+  Z.el('path', { d: 'M-12,8 L-12,-3 L-7,-3 L-7,-8 L7,-8 L7,-3 L12,-3 L12,8 Z', fill: 'none', stroke: 'rgba(255,255,255,.55)', 'stroke-width': 1 }, g);
+  Z.el('circle', { cx: -21, cy: -6, r: 2.2, fill: C.green, filter: 'url(#cnGl)' }, g);
+  Z.el('circle', { cx: 21, cy: -6, r: 2.2, fill: n.dim ? '#8fbfff' : n.col }, g);
+  Z.label(n.x, vmY + 30, n.n, '', 'color:#e5e5ea;font-weight:700;font-size:12px');
+});
+Z.label(nics[1].x, busY + 4, '<span style="margin:0;color:#cfe6ff">cloud-netconfigd</span>', 'box', 'font-size:11.5px;padding:4px 10px;border-color:rgba(100,210,255,.45)');
+
+// lane caption
+Z.label(598, nics[1].laneY - 16, '10.0.1.5', '', 'color:#64d2ff;font-size:12px');
+Z.label(598, nics[2].laneY - 16, 'secondary IP', '', 'color:#40c8e0;font-size:12px');
+Z.label(440, 580, '<b>policy routing</b><span>per NIC &middot; netlink &middot; CAP_NET_ADMIN</span>');
+Z.label(146, 64, 'Azure &middot; AWS EC2 &middot; GCP', 'chip', 'font-size:11.5px');
+})();
+</script>
 </body>
 </html>
