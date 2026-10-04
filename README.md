@@ -1,13 +1,13 @@
 # cloud-netconfig
 
-[![CI](https://github.com/hypersdk/cloud-netconfig/actions/workflows/ci.yml/badge.svg)](https://github.com/hypersdk/cloud-netconfig/actions/workflows/ci.yml)
+[![CI](https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml/badge.svg)](https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![Release](https://img.shields.io/github/v/release/hypersdk/cloud-netconfig)](https://github.com/hypersdk/cloud-netconfig/releases)
+[![Release](https://img.shields.io/github/v/release/hypersdk/cloud-netconfig)](https://github.com/zyvorai/zyvor-cloud-netconfig/releases)
 
 [![Book a demo](https://img.shields.io/badge/Book_a_demo-0071e3?style=for-the-badge)](https://zyvor.dev/schedule?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_hero)
 [![30-day PoC](https://img.shields.io/badge/30--day_PoC-1d1d1f?style=for-the-badge)](https://zyvor.dev/poc?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_hero)
 
-![cloud-netconfig — automatic multi-cloud Linux networking](docs/social/cloud-netconfig-share-card.png)
+![cloud-netconfig — automatic multi-cloud Linux networking](docs/social/cloud-netconfig-hero-dark.jpg)
 
 **Automatic network configuration for cloud instances using provider metadata (Azure, AWS, GCP, and others).**
 
@@ -103,7 +103,7 @@ Enable debug logging in the config file (`logging.level: debug`) when diagnosing
 
 | | Community Edition (this repo) | Enterprise ([zyvor.dev](https://zyvor.dev/?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_edition)) |
 |---|------------------------------|--------------------------------------------------------------------------------------------|
-| **Support** | [GitHub Issues](https://github.com/hypersdk/cloud-netconfig/issues) | SLA, [sales@zyvor.dev](mailto:sales@zyvor.dev), professional services |
+| **Support** | [GitHub Issues](https://github.com/zyvorai/zyvor-cloud-netconfig/issues) | SLA, [sales@zyvor.dev](mailto:sales@zyvor.dev), professional services |
 | **Scope** | Open-source daemon | Supported multi-cloud production rollouts |
 | **Features** | Multi-cloud metadata clients, event-driven reconfiguration, policy-based routing | Same codebase + fleet automation and rollout support |
 | **Platform** | cloud-netconfig | Zyvor Platform migration and operations suite |
@@ -123,7 +123,7 @@ cloud-netconfig Community Edition is free and open source, maintained by **Susan
 
 - **Enterprise / production:** [zyvor.dev/contact](https://zyvor.dev/contact?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer) · [sales@zyvor.dev](mailto:sales@zyvor.dev)
 - **Demo and PoC:** [Book a demo](https://zyvor.dev/schedule?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer) · [30-day PoC](https://zyvor.dev/poc?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer)
-- **Community help:** [GitHub Issues](https://github.com/hypersdk/cloud-netconfig/issues)
+- **Community help:** [GitHub Issues](https://github.com/zyvorai/zyvor-cloud-netconfig/issues)
 
 ## License
 
