@@ -14,10 +14,10 @@ const config: Config = {
   },
 
   url: 'https://zyvorai.github.io',
-  baseUrl: '/cloud-netconfig/',
+  baseUrl: '/zyvor-cloud-netconfig/',
 
   organizationName: 'zyvorai',
-  projectName: 'cloud-netconfig',
+  projectName: 'zyvor-cloud-netconfig',
 
   onBrokenLinks: 'warn',
 
@@ -41,7 +41,7 @@ const config: Config = {
           path: '../docs',
           routeBasePath: 'docs',
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/zyvorai/cloud-netconfig/tree/main/docs/',
+          editUrl: 'https://github.com/zyvorai/zyvor-cloud-netconfig/tree/main/docs/',
         },
         blog: false,
         theme: {
@@ -53,7 +53,8 @@ const config: Config = {
 
   themeConfig: {
     colorMode: {
-      respectPrefersColorScheme: true,
+      defaultMode: 'dark',
+      respectPrefersColorScheme: false,
     },
     navbar: {
       hideOnScroll: false,

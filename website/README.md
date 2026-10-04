@@ -1,6 +1,6 @@
 # cloud-netconfig docs site
 
-Built with [Docusaurus](https://docusaurus.io/). Serves the live docs at https://zyvorai.github.io/cloud-netconfig/.
+Built with [Docusaurus](https://docusaurus.io/). Serves the live docs at https://zyvorai.github.io/zyvor-cloud-netconfig/.
 
 Points directly at the repo's existing `docs/` folder (`docusaurus.config.ts`'s `docs.path: '../docs'`) rather than a hand-curated copy — every doc becomes a page automatically, sidebar auto-generated from the folder structure.
 
