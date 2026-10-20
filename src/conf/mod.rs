@@ -403,7 +403,8 @@ fn parse_duration(s: &str) -> Result<Duration> {
         return Err(anyhow::anyhow!("empty duration"));
     }
 
-    let (num_str, unit) = s.split_at(s.len() - 1);
+    let unit_start = s.char_indices().last().map(|(i, _)| i).unwrap_or(0);
+    let (num_str, unit) = s.split_at(unit_start);
     let num: u64 = num_str.parse().context("invalid duration number")?;
 
     match unit {
@@ -425,6 +426,19 @@ mod tests {
         assert_eq!(parse_duration("5m").unwrap(), Duration::from_secs(300));
         assert_eq!(parse_duration("1h").unwrap(), Duration::from_secs(3600));
         assert_eq!(parse_duration("1d").unwrap(), Duration::from_secs(86400));
+    }
+
+    #[test]
+    fn test_parse_duration_multibyte_does_not_panic() {
+        assert!(parse_duration("5\u{00e9}").is_err());
+        assert!(parse_duration("\u{00e9}").is_err());
+    }
+
+    #[test]
+    fn test_shipped_config_parses() {
+        let s = include_str!("../../distribution/etc/cloud-network/config.yaml");
+        let config: Config = serde_yaml::from_str(s).expect("shipped config.yaml must parse");
+        config.validate().unwrap();
     }
 
     #[test]

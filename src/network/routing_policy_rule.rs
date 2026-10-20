@@ -99,7 +99,16 @@ async fn rule_exists(rule: &RoutingPolicyRule) -> Result<bool> {
     let mut rule_stream = handle.rule().get(rtnetlink::IpVersion::V4).execute();
 
     while let Some(rule_msg) = rule_stream.try_next().await? {
-        let table = rule_msg.header.table as u32;
+        // Tables above 255 are carried in the FRA_TABLE attribute; the
+        // 8-bit header field is then RT_TABLE_COMPAT (252).
+        let table = rule_msg
+            .attributes
+            .iter()
+            .find_map(|attr| match attr {
+                RuleAttribute::Table(t) => Some(*t),
+                _ => None,
+            })
+            .unwrap_or(rule_msg.header.table as u32);
         if table != rule.table {
             continue;
         }

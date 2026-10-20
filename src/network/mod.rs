@@ -17,7 +17,7 @@ pub async fn configure_by_index(if_index: u32) -> Result<()> {
     let gw = get_ipv4_gateway(if_index).await?;
 
     let route = Route {
-        table: crate::conf::ROUTE_TABLE_BASE + if_index + if_index,
+        table: crate::conf::ROUTE_TABLE_BASE + if_index,
         if_index,
         gw: gw.clone(),
     };
