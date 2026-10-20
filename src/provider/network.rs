@@ -89,7 +89,7 @@ async fn configure_route(
         None => network::get_ipv4_gateway(link.ifindex).await?,
     };
 
-    let table = env.route_table + link.ifindex + link.ifindex;
+    let table = env.route_table + link.ifindex;
 
     let route = Route {
         table,

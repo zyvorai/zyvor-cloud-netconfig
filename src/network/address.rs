@@ -65,7 +65,7 @@ pub async fn address_set(name: &str, address: &str) -> Result<()> {
         .replace()
         .execute()
         .await
-        .ok();
+        .context("Failed to set address")?;
 
     Ok(())
 }
