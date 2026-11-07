@@ -102,9 +102,15 @@ async fn main() -> anyhow::Result<()> {
 
     tracing::info!("Detected cloud environment: {}", kind);
 
-    // Initialize provider environment
-    let env =
-        provider::Environment::new(kind, &config).expect("Failed to initialize cloud provider");
+    // Initialize provider environment. Detection recognises more clouds than
+    // there are providers for, so fail cleanly instead of panicking.
+    let Some(env) = provider::Environment::new(kind, &config) else {
+        tracing::error!(
+            "Cloud environment '{}' is detected but not supported yet (supported: azure, aws, gcp), Aborting ...",
+            kind
+        );
+        std::process::exit(1);
+    };
 
     // Handle security and privilege dropping
     if let Ok(cred) = system::get_user_credentials(None) {
