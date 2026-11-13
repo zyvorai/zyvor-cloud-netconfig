@@ -28,6 +28,17 @@ impl Links {
             links_by_mac: std::collections::HashMap::new(),
         }
     }
+
+    /// Records `link` unless a link with the same MAC was already seen.
+    ///
+    /// Several links can share a MAC: on Azure with Accelerated Networking the
+    /// SR-IOV VF (e.g. `enP1s1`) carries the synthetic `eth0`'s MAC and is
+    /// dumped after it, and VLAN sub-interfaces inherit their parent's MAC.
+    /// Keep the first (lowest ifindex) link, as the original Go implementation
+    /// did, so addresses and routes go on the primary interface.
+    pub fn insert_first(&mut self, link: Link) {
+        self.links_by_mac.entry(link.mac.clone()).or_insert(link);
+    }
 }
 
 pub async fn acquire_links() -> Result<Links> {
@@ -66,12 +77,12 @@ pub async fn acquire_links() -> Result<Links> {
             name,
             ifindex: link_msg.header.index,
             oper_state,
-            mac: mac.clone(),
+            mac,
             mtu,
             addresses: None,
         };
 
-        links.links_by_mac.insert(mac, link);
+        links.insert_first(link);
     }
 
     Ok(links)
@@ -143,4 +154,31 @@ pub async fn link_set_mtu(if_index: u32, mtu: u32) -> Result<()> {
         .context("Failed to set MTU")?;
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn link(name: &str, ifindex: u32, mac: &str) -> Link {
+        Link {
+            name: name.to_string(),
+            ifindex,
+            oper_state: "Up".to_string(),
+            mac: mac.to_string(),
+            mtu: 1500,
+            addresses: None,
+        }
+    }
+
+    #[test]
+    fn keeps_first_link_for_shared_mac() {
+        // Azure Accelerated Networking: the VF shares eth0's MAC and has a higher ifindex.
+        let mut links = Links::new();
+        links.insert_first(link("eth0", 2, "00:0d:3a:f8:06:ec"));
+        links.insert_first(link("enP1s1", 3, "00:0d:3a:f8:06:ec"));
+
+        assert_eq!(links.links_by_mac.len(), 1);
+        assert_eq!(links.links_by_mac["00:0d:3a:f8:06:ec"].name, "eth0");
+    }
 }

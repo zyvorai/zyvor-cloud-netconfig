@@ -32,6 +32,20 @@ pub fn parse_mac(s: &str) -> String {
     result
 }
 
+/// Normalizes a MAC address to the lowercase, colon-separated form used as the
+/// key of `Links::links_by_mac` (e.g. `00:0d:3a:f8:06:ec`).
+///
+/// Accepts the bare upper-case form returned by the Azure Instance Metadata
+/// Service (`000D3AF806EC`) as well as `-` or `:` separated forms.
+pub fn normalize_mac(s: &str) -> String {
+    let hex: String = s
+        .chars()
+        .filter(|c| *c != ':' && *c != '-')
+        .collect::<String>()
+        .to_ascii_lowercase();
+    parse_mac(&hex)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -39,6 +53,14 @@ mod tests {
     #[test]
     fn test_parse_mac() {
         assert_eq!(parse_mac("001122334455"), "00:11:22:33:44:55");
+    }
+
+    #[test]
+    fn test_normalize_mac() {
+        // Azure IMDS returns bare, upper-case MACs.
+        assert_eq!(normalize_mac("000D3AF806EC"), "00:0d:3a:f8:06:ec");
+        assert_eq!(normalize_mac("00-0D-3A-F8-06-EC"), "00:0d:3a:f8:06:ec");
+        assert_eq!(normalize_mac("00:0d:3a:f8:06:ec"), "00:0d:3a:f8:06:ec");
     }
 
     #[test]

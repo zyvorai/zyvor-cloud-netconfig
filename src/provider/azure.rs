@@ -77,7 +77,9 @@ impl Azure {
 
         if let Some(ref meta) = self.metadata {
             for iface in &meta.network.interface {
-                if iface.mac_address.eq_ignore_ascii_case(mac) {
+                if crate::parser::normalize_mac(&iface.mac_address)
+                    == crate::parser::normalize_mac(mac)
+                {
                     if let Some(subnet) = iface.ipv4.subnet.first() {
                         let prefix = &subnet.prefix;
                         for ip_addr in &iface.ipv4.ip_address {
@@ -138,12 +140,67 @@ impl super::CloudProvider for Azure {
     async fn link_save_cloud_metadata(&self, env: &super::Environment) -> Result<()> {
         if let Some(ref meta) = self.metadata {
             for iface in &meta.network.interface {
-                if let Some(link) = env.links.links_by_mac.get(&iface.mac_address) {
+                let mac = crate::parser::normalize_mac(&iface.mac_address);
+                if let Some(link) = env.links.links_by_mac.get(&mac) {
                     let path = format!("{}/{}", crate::conf::LINK_STATE_DIR, link.name);
                     crate::system::create_and_save_json(&path, iface)?;
                 }
             }
         }
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Shape and macAddress format taken from the Azure IMDS documentation
+    // ("Sample 6: Retrieve network information"): bare, upper-case hex.
+    const IMDS_SAMPLE: &str = r#"{
+        "compute": {
+            "name": "examplevmname",
+            "location": "westus",
+            "vmId": "02aab8a4-74ef-476e-8182-f6d2ba4166a6",
+            "vmSize": "Standard_A3"
+        },
+        "network": {
+            "interface": [{
+                "ipv4": {
+                    "ipAddress": [{
+                        "privateIpAddress": "10.144.133.132",
+                        "publicIpAddress": ""
+                    }],
+                    "subnet": [{
+                        "address": "10.144.133.128",
+                        "prefix": "26"
+                    }]
+                },
+                "macAddress": "000D3AF806EC"
+            }]
+        }
+    }"#;
+
+    fn azure_with_sample() -> Azure {
+        Azure {
+            metadata: Some(serde_json::from_str(IMDS_SAMPLE).unwrap()),
+            api_version: "2021-02-01".to_string(),
+        }
+    }
+
+    #[test]
+    fn matches_link_mac_against_imds_mac() {
+        // Links are keyed by the kernel's lower-case, colon-separated MAC.
+        let addresses =
+            azure_with_sample().parse_ipv4_addresses_from_metadata_by_mac("00:0d:3a:f8:06:ec");
+        assert_eq!(addresses.len(), 1);
+        assert!(addresses.contains_key("10.144.133.132/26"));
+    }
+
+    #[test]
+    fn unknown_mac_yields_no_addresses() {
+        let addresses =
+            azure_with_sample().parse_ipv4_addresses_from_metadata_by_mac("00:0d:3a:00:00:01");
+        assert!(addresses.is_empty());
     }
 }
