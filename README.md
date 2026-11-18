@@ -2,6 +2,8 @@
 
 # cloud-netconfig
 
+[Client overview (PDF)](docs/cloud-netconfig-Client-Overview.pdf)
+
 [![CI](https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml/badge.svg)](https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Release](https://img.shields.io/github/v/release/hypersdk/cloud-netconfig)](https://github.com/zyvorai/zyvor-cloud-netconfig/releases)
