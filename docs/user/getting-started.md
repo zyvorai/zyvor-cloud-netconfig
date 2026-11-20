@@ -11,7 +11,7 @@ cloud-netconfig applies secondary IPs and policy routing from Azure, AWS EC2, an
 ## 1. Build and install
 
 ```bash
-git clone https://github.com/hypersdk/cloud-netconfig.git
+git clone https://github.com/zyvorai/zyvor-cloud-netconfig.git
 cd zyvor-cloud-netconfig
 make build
 sudo make install

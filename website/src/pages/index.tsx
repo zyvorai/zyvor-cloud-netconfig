@@ -31,12 +31,12 @@ function HomepageHeader() {
           <div className={styles.buttons}>
             <Link
               className="button button--secondary button--lg"
-              href="https://github.com/hypersdk/cloud-netconfig#installation">
+              href="https://github.com/zyvorai/zyvor-cloud-netconfig#installation">
               Get Started
             </Link>
             <Link
               className="button button--outline button--lg button--secondary"
-              to="https://github.com/hypersdk/cloud-netconfig">
+              to="https://github.com/zyvorai/zyvor-cloud-netconfig">
               View on GitHub
             </Link>
           </div>
@@ -97,7 +97,7 @@ function TrustBand() {
           </div>
           <div className={styles.trustBadges}>
             <img
-              src="https://github.com/hypersdk/cloud-netconfig/actions/workflows/ci.yml/badge.svg"
+              src="https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml/badge.svg"
               alt="CI status"
             />
             <img

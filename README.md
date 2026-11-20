@@ -4,7 +4,7 @@
 
 [![CI](https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml/badge.svg)](https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml)
 [![License: Zyvor Production](https://img.shields.io/badge/license-Zyvor%20Production%201.0-blue.svg)](LICENSE.txt)
-[![Release](https://img.shields.io/github/v/release/hypersdk/cloud-netconfig)](https://github.com/zyvorai/zyvor-cloud-netconfig/releases)
+[![Release](https://img.shields.io/github/v/release/zyvorai/zyvor-cloud-netconfig)](https://github.com/zyvorai/zyvor-cloud-netconfig/releases)
 [![Rust](https://img.shields.io/badge/Rust-2021-dea584?logo=rust&logoColor=white)](Cargo.toml)
 
 [![Book a demo](https://img.shields.io/badge/Book_a_demo-0071e3?style=for-the-badge)](https://zyvor.dev/schedule?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_hero)
@@ -64,7 +64,7 @@
 Requirements: a Linux cloud VM on Azure, AWS or GCP, a Rust toolchain, and systemd.
 
 ```bash
-git clone https://github.com/hypersdk/cloud-netconfig.git
+git clone https://github.com/zyvorai/zyvor-cloud-netconfig.git
 cd zyvor-cloud-netconfig
 make build
 sudo make install

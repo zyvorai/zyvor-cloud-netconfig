@@ -22,7 +22,7 @@ cloud-netconfig runs as a systemd daemon on Azure, AWS EC2, or GCP VMs. It watch
 ## Install and enable
 
 ```bash
-git clone https://github.com/hypersdk/cloud-netconfig.git
+git clone https://github.com/zyvorai/zyvor-cloud-netconfig.git
 cd zyvor-cloud-netconfig
 make build && sudo make install
 sudo cp /etc/cloud-network/config.yaml /etc/cloud-network/cloud-network.yaml

@@ -11,7 +11,7 @@
 | **Local API** | `127.0.0.1:5209` by default — not exposed beyond localhost unless you change `server.listen` |
 | **Examples** | `/usr/share/doc/cloud-netconfig/examples/` after package install |
 | **Security** | Follow upstream `SECURITY.md`; restrict config file permissions (`0644`, root-owned) |
-| **Support** | [GitHub Issues](https://github.com/hypersdk/cloud-netconfig/issues) · [Contact Zyvor](https://zyvor.dev/contact) for Enterprise |
+| **Support** | [GitHub Issues](https://github.com/zyvorai/zyvor-cloud-netconfig/issues) · [Contact Zyvor](https://zyvor.dev/contact) for Enterprise |
 
 ## systemd essentials
 

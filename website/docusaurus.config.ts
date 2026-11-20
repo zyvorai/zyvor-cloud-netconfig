@@ -74,7 +74,7 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          href: 'https://github.com/hypersdk/cloud-netconfig',
+          href: 'https://github.com/zyvorai/zyvor-cloud-netconfig',
           label: 'GitHub',
           position: 'right',
         },
@@ -94,10 +94,10 @@ const config: Config = {
         {
           title: 'Project',
           items: [
-            {label: 'GitHub', href: 'https://github.com/hypersdk/cloud-netconfig'},
+            {label: 'GitHub', href: 'https://github.com/zyvorai/zyvor-cloud-netconfig'},
             {
               label: 'License (Zyvor Production 1.0)',
-              href: 'https://github.com/hypersdk/cloud-netconfig/blob/main/LICENSE.txt',
+              href: 'https://github.com/zyvorai/zyvor-cloud-netconfig/blob/main/LICENSE.txt',
             },
           ],
         },

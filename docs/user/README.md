@@ -25,4 +25,4 @@ Output lands in [`pdf/`](pdf/):
 
 Also available: [Using cnctl (CLI)](using-the-dashboard.md).
 
-**→ Product:** https://zyvor.dev/cloud-netconfig · **GitHub:** https://github.com/hypersdk/cloud-netconfig
+**→ Product:** https://zyvor.dev/cloud-netconfig · **GitHub:** https://github.com/zyvorai/zyvor-cloud-netconfig
