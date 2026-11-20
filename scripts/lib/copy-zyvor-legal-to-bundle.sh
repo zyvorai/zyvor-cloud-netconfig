@@ -14,7 +14,7 @@ fi
 
 mkdir -p "${STAGE}/docs/legal" "${STAGE}/legal/templates"
 
-# Code license (Apache-2.0 or proprietary LICENSE)
+# Code license (Zyvor Production License v1.0)
 if [[ -f "${ROOT}/LICENSE" ]]; then
   cp "${ROOT}/LICENSE" "${STAGE}/LICENSE"
 fi

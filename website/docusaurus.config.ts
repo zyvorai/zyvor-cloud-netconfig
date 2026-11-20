@@ -93,7 +93,7 @@ const config: Config = {
           items: [
             {label: 'GitHub', href: 'https://github.com/hypersdk/cloud-netconfig'},
             {
-              label: 'License (Apache-2.0)',
+              label: 'License (Zyvor Production 1.0)',
               href: 'https://github.com/hypersdk/cloud-netconfig/blob/main/LICENSE.txt',
             },
           ],
@@ -106,7 +106,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Zyvor AI Labs. cloud-netconfig Community Edition is Apache-2.0 licensed.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Zyvor AI Labs. cloud-netconfig Community Edition is licensed under the Zyvor Production License v1.0.`,
     },
     prism: {
       theme: prismThemes.github,

@@ -5,7 +5,7 @@
 [Client overview (PDF)](docs/cloud-netconfig-Client-Overview.pdf)
 
 [![CI](https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml/badge.svg)](https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml)
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![License: Zyvor Production](https://img.shields.io/badge/license-Zyvor%20Production%201.0-blue.svg)](LICENSE.txt)
 [![Release](https://img.shields.io/github/v/release/hypersdk/cloud-netconfig)](https://github.com/zyvorai/zyvor-cloud-netconfig/releases)
 [![Rust](https://img.shields.io/badge/Rust-2021-dea584?logo=rust&logoColor=white)](Cargo.toml)
 
@@ -169,7 +169,7 @@ Version **0.3.1** (Community Edition, see [releases](https://github.com/zyvorai/
 | | Community Edition (this repo) | Enterprise ([zyvor.dev](https://zyvor.dev/?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_edition)) |
 |---|------------------------------|--------------------------------------------------------------------------------------------|
 | **Support** | [GitHub Issues](https://github.com/zyvorai/zyvor-cloud-netconfig/issues) | SLA, [sales@zyvor.dev](mailto:sales@zyvor.dev), professional services |
-| **Scope** | Open-source daemon | Supported multi-cloud production rollouts |
+| **Scope** | Source-available daemon | Supported multi-cloud production rollouts |
 | **Features** | Multi-cloud metadata clients, metadata-driven reconfiguration, policy-based routing | Same codebase + fleet automation and rollout support |
 | **Platform** | cloud-netconfig | Zyvor Platform migration and operations suite |
 
@@ -180,7 +180,7 @@ Version **0.3.1** (Community Edition, see [releases](https://github.com/zyvorai/
 | **Pricing** | [zyvor.dev/pricing](https://zyvor.dev/pricing?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_edition) |
 | **Contact** | [zyvor.dev/contact](https://zyvor.dev/contact?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_edition) · [sales@zyvor.dev](mailto:sales@zyvor.dev) |
 
-Community Edition is the open-source daemon. Supported multi-cloud rollouts, SLAs, and Zyvor Platform migration integration → contact Zyvor (not GitHub Issues). Details: [docs/enterprise.md](docs/enterprise.md).
+Community Edition is the source-available daemon. Supported multi-cloud rollouts, SLAs, and Zyvor Platform migration integration → contact Zyvor (not GitHub Issues). Details: [docs/enterprise.md](docs/enterprise.md).
 
 ---
 
@@ -199,7 +199,7 @@ Community Edition is the open-source daemon. Supported multi-cloud rollouts, SLA
 
 ## Support the project
 
-cloud-netconfig Community Edition is free and open source, maintained by **Susant Sahani** · [Zyvor AI Labs](https://zyvor.dev/?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer)
+cloud-netconfig Community Edition is source-available, maintained by **Susant Sahani** · [Zyvor AI Labs](https://zyvor.dev/?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer)
 
 - **Enterprise / production:** [zyvor.dev/contact](https://zyvor.dev/contact?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer) · [sales@zyvor.dev](mailto:sales@zyvor.dev)
 - **Demo and PoC:** [Book a demo](https://zyvor.dev/schedule?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer) · [30-day PoC](https://zyvor.dev/poc?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer)
@@ -207,7 +207,10 @@ cloud-netconfig Community Edition is free and open source, maintained by **Susan
 
 ## License
 
-cloud-netconfig is **free and open source** under the [Apache License, Version 2.0](LICENSE.txt) (see [NOTICE](NOTICE)). You may use, modify, and run it for personal, lab, and commercial production use at no charge, subject to Apache-2.0 (preserve notices / NOTICE where required). That does not change.
+cloud-netconfig is source-available under the **[Zyvor Production License v1.0](LICENSE.txt)** (SPDX `LicenseRef-Zyvor-Production-1.0`, also in [LICENSES/](LICENSES/LicenseRef-Zyvor-Production-1.0.txt); see [NOTICE](NOTICE)).
+
+- **Free** for evaluation, development, testing, proofs of concept, research, education and all other non-production use.
+- **Production use needs a commercial license** from Zyvor AI Labs. A 30-day trial key is available for production evaluation. Buy / get a quote: [zyvor.dev/buy](https://zyvor.dev/buy) · [sales@zyvor.dev](mailto:sales@zyvor.dev).
 
 **Zyvor Enterprise** adds what production teams ask for: supported releases, deployment and upgrade guidance, priority incident triage, a named technical contact and 24x7 critical intake. Plans and terms: [docs/SUBSCRIPTION-MODEL.md](docs/SUBSCRIPTION-MODEL.md) · [Pricing](https://zyvor.dev/pricing?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_license) · [sales@zyvor.dev](mailto:sales@zyvor.dev).
 

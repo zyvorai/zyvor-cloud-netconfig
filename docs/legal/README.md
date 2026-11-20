@@ -1,6 +1,6 @@
 # Cloud NetConfig legal
 
-- [LICENSE.txt](../../LICENSE.txt) — Apache-2.0
+- [LICENSE.txt](../../LICENSE.txt) — Zyvor Production License v1.0
 - [NOTICE](../../NOTICE)
 - [ZYVOR-COMPANY-TERMS.md](../../ZYVOR-COMPANY-TERMS.md)
 

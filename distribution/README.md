@@ -243,4 +243,4 @@ When packaging cloud-netconfig, install files to:
 
 ## License
 
-All files: Apache-2.0
+All files: Zyvor Production License v1.0

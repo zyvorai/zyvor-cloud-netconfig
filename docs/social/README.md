@@ -9,4 +9,4 @@
 Needs Google Chrome and macOS `sips` (already on a Mac); nothing is installed.
 
 Every claim on the social card is already sourced in the project README and docs.
-Licence wording follows `LICENSE.txt`: Apache License 2.0.
+Licence wording follows `LICENSE.txt`: Zyvor Production License v1.0.

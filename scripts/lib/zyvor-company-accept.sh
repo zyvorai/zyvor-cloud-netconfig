@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Copyright 2026 Zyvor AI Labs · https://zyvor.dev
 # SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
-# Zyvor company terms — does not replace LICENSE.txt (Apache-2.0).
+# Zyvor company terms — does not replace LICENSE.txt (Zyvor Production License v1.0).
 set -euo pipefail
 PRODUCT="Cloud NetConfig"
-CODE_LICENSE="Apache-2.0"
+CODE_LICENSE="Zyvor Production License v1.0"
 LICENSE_FILE="LICENSE.txt"
 ENV_PREFIX="CLOUD_NETCONFIG"
 RECORD_DIR="cloud-netconfig"

@@ -81,10 +81,10 @@ function TrustBand() {
         <Reveal className={styles.trustGrid}>
           <div>
             <Heading as="h3" className={styles.sectionHeading}>
-              Open source, Community Edition
+              Source-available, Community Edition
             </Heading>
             <p>
-              Apache-2.0 licensed daemon, maintained by Zyvor AI Labs.
+              Daemon under the Zyvor Production License, maintained by Zyvor AI Labs.
               Runs unprivileged with <code>CAP_NET_ADMIN</code> rather than
               full root. Enterprise adds fleet automation, SLAs, and
               HyperSDK migration/operations integration on the same
@@ -98,8 +98,8 @@ function TrustBand() {
               alt="CI status"
             />
             <img
-              src="https://img.shields.io/badge/License-Apache_2.0-blue.svg"
-              alt="Apache 2.0 license"
+              src="https://img.shields.io/badge/license-Zyvor%20Production%201.0-blue.svg"
+              alt="Zyvor Production License v1.0"
             />
           </div>
         </Reveal>
@@ -117,7 +117,8 @@ function EnterpriseCTA() {
             Need supported multi-cloud rollouts?
           </Heading>
           <p className={styles.enterpriseCopy}>
-            Community Edition is free and open source. Zyvor Enterprise
+            Community Edition is free for non-production use; production use
+            needs a commercial license. Zyvor Enterprise
             adds SLAs, professional services, and HyperSDK migration
             integration for production multi-cloud fleets.
           </p>

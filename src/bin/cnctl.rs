@@ -247,7 +247,7 @@ async fn main() -> anyhow::Result<()> {
 
         Commands::Version => {
             println!("cnctl version {}", conf::VERSION);
-            println!("License:        Apache-2.0");
+            println!("License:        Zyvor Production License v1.0");
         }
     }
 
