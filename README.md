@@ -2,8 +2,6 @@
 
 # cloud-netconfig
 
-[Client overview (PDF)](docs/cloud-netconfig-Client-Overview.pdf)
-
 [![CI](https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml/badge.svg)](https://github.com/zyvorai/zyvor-cloud-netconfig/actions/workflows/ci.yml)
 [![License: Zyvor Production](https://img.shields.io/badge/license-Zyvor%20Production%201.0-blue.svg)](LICENSE.txt)
 [![Release](https://img.shields.io/github/v/release/hypersdk/cloud-netconfig)](https://github.com/zyvorai/zyvor-cloud-netconfig/releases)
@@ -47,22 +45,6 @@
 - Policy-based routing for multi-homed hosts
 - Local HTTP API (`/health`, `/api/status`) for daemon status
 - Runs unprivileged with `CAP_NET_ADMIN`
-
----
-
-## cloud-netconfig vs cloud-init
-
-![cloud-netconfig vs cloud-init: not just at boot, keep NICs in sync](docs/ux/readme-vs.jpg)
-
-| | **cloud-netconfig** | **cloud-init** |
-|---|---|---|
-| What it is | A networking-only daemon | Instance initialization framework |
-| When it runs | Continuously: on start and every refresh interval | During boot stages |
-| Scope | Secondary IPs, per-interface routing tables, policy rules | Users, SSH keys, packages, files, network and more |
-| Network output | Applied directly over netlink | Rendered for netplan, networkd, ENI or sysconfig |
-| Privileges | `cloud-network` user with `CAP_NET_ADMIN` only | Runs as root |
-| Inspect state | `cnctl status`, local HTTP status API | `cloud-init status`, logs |
-| **Choose cloud-init when** | | You need full instance setup at boot and its network handling already covers your NICs; the two can run side by side |
 
 ---
 
