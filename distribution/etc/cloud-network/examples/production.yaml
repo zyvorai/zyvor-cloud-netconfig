@@ -1,0 +1,61 @@
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+# Production-hardened cloud-netconfig configuration
+
+logging:
+  level: warn  # Less verbose in production
+  format: json
+  timestamps: true
+  # Optional: log to file
+  # file: /var/log/cloud-network/cloud-netconfig.log
+
+server:
+  listen:
+    address: 127.0.0.1  # Localhost only for security
+    port: 5209
+
+metadata:
+  refresh_interval: 600s  # Less frequent in production
+  request_timeout: 15s    # Longer timeout for reliability
+  retry:
+    enabled: true
+    max_attempts: 5
+    backoff: 10s
+
+network:
+  interfaces:
+    enabled:
+      - eth1
+      - eth2
+
+  primary:
+    enabled: true
+
+  routing:
+    table_base: 9999
+    policy_routing: true
+    manage_default_routes: true
+
+  mtu:
+    auto_configure: true
+
+cloud:
+  auto_detect: true
+
+security:
+  user: cloud-network
+  capabilities:
+    - CAP_NET_ADMIN  # Only necessary capability
+  watchdog:
+    enabled: true
+    interval: 30s
+
+state:
+  directory: /run/cloud-network
+  persist_metadata: true
+  per_interface_files: true
+
+features:
+  network_events: true
+  cleanup_stale: true
+  ipv6: false
+  health_check: true

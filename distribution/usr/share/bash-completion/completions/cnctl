@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+# bash completion for cnctl
+
+_cnctl() {
+    local cur prev words cword
+    _init_completion || return
+
+    local commands="status apply reload version help"
+    local status_targets="system network all"
+
+    case $cword in
+        1)
+            COMPREPLY=($(compgen -W "$commands" -- "$cur"))
+            return
+            ;;
+        2)
+            case ${words[1]} in
+                status)
+                    COMPREPLY=($(compgen -W "$status_targets" -- "$cur"))
+                    return
+                    ;;
+                apply)
+                    case $prev in
+                        -c|--config)
+                            _filedir yaml
+                            return
+                            ;;
+                        *)
+                            COMPREPLY=($(compgen -W "--config -c --dry-run -d --help -h" -- "$cur"))
+                            return
+                            ;;
+                    esac
+                    ;;
+                reload)
+                    COMPREPLY=($(compgen -W "--force -f --help -h" -- "$cur"))
+                    return
+                    ;;
+            esac
+            ;;
+        *)
+            case ${words[1]} in
+                apply)
+                    case $prev in
+                        -c|--config)
+                            _filedir yaml
+                            return
+                            ;;
+                        *)
+                            COMPREPLY=($(compgen -W "--config -c --dry-run -d --help -h" -- "$cur"))
+                            return
+                            ;;
+                    esac
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+complete -F _cnctl cnctl

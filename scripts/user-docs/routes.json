@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "label": "Getting Started",
+      "path": "getting-started",
+      "category": "Onboarding",
+      "legacy": false
+    },
+    {
+      "label": "Configuration",
+      "path": "configuration",
+      "category": "Setup",
+      "legacy": false
+    },
+    {
+      "label": "Workflows",
+      "path": "workflows",
+      "category": "Operations",
+      "legacy": false
+    },
+    {
+      "label": "Admin Basics",
+      "path": "admin-basics",
+      "category": "Admin",
+      "legacy": false
+    }
+  ]
+}

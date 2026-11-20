@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>Getting Started — cloud-netconfig</title>
+<style>
+@page{size:A4;margin:15mm 16mm}*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Segoe UI',system-ui,sans-serif;color:#1f2937;line-height:1.58;font-size:10.5pt}
+.cover{height:262mm;margin:-15mm -16mm 0;background:linear-gradient(135deg,#042f2e,#115e59,#0d1b2a);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;page-break-after:always;position:relative}
+.cover .kicker{letter-spacing:5px;text-transform:uppercase;opacity:.72;margin-bottom:1.4em}
+.cover h1{font-size:3.2em;font-weight:800;letter-spacing:-2px}
+.cover h1 span{color:#3FD0E8}
+.cover .sub{font-size:1.3em;font-weight:300;opacity:.93;margin:1em 0;max-width:24em}
+.cover .badge{display:inline-block;background:rgba(96,165,250,.2);border:1px solid #3FD0E8;padding:8px 22px;border-radius:20px;margin-top:2em}
+.cover .foot{position:absolute;bottom:34px;font-size:.82em;opacity:.6}
+h2{page-break-before:always;margin:0 0 .35em;font-size:1.55em;font-weight:750;color:#12203a;border-bottom:2px solid #e5edfb;padding-bottom:.28em}
+h2:first-of-type{page-break-before:avoid}
+h3{margin:1.1em 0 .4em;font-size:1.12em;font-weight:700}
+p,li{margin:.4em 0}ul,ol{margin:.5em 0 .9em 1.4em}
+a{color:#2563eb;text-decoration:none}
+code{background:#eef2f7;padding:1px 6px;border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,monospace}
+pre{background:#0f172a;color:#e2e8f0;padding:12px 15px;border-radius:9px;overflow-x:auto;margin:.8em 0}
+table{width:100%;border-collapse:collapse;margin:.8em 0 1.1em;font-size:9.5pt}
+th,td{border:1px solid #e5e7eb;padding:6px 8px;text-align:left;vertical-align:top}th{background:#f1f5f9}
+hr{border:none;border-top:1px solid #e5e7eb;margin:1.2em 0}
+</style></head><body>
+<section class="cover"><div class="kicker">ZyvorAI Labs · User Documentation</div>
+<h1>cloud-<span>netconfig</span></h1>
+<div class="sub">Getting Started</div>
+<div class="badge">2026-08-29</div>
+<div class="foot">zyvor.dev · Confidential — for licensed users</div></section>
+<main><p>cloud-netconfig applies secondary IPs and policy routing from Azure, AWS EC2, and GCP instance metadata — event-driven via netlink, so changes propagate without manual route edits. This page gets you from install to a running daemon.</p>
+<h2>Prerequisites</h2>
+<ul>
+<li>Root/sudo access on the host (installs a systemd unit and modifies routes).</li>
+<li>The host must run on a supported cloud (Azure, AWS EC2, or GCP) so instance metadata is reachable.</li>
+<li>Rust toolchain and <code>make</code> to build from source (see the upstream README for exact versions).</li>
+</ul>
+<h2>1. Build and install</h2>
+<pre><code class="language-bash">git clone https://github.com/zyvorai/zyvor-cloud-netconfig.git
+cd zyvor-cloud-netconfig
+make build
+sudo make install
+sudo useradd -M -s /usr/bin/nologin cloud-network 2&gt;/dev/null || true
+</code></pre>
+<p>This builds and installs <code>cloud-netconfigd</code> (daemon) and <code>cnctl</code> (CLI).</p>
+<h2>2. Activate configuration</h2>
+<p>Packaging installs the annotated example as <code>/etc/cloud-network/config.yaml</code>. The daemon reads <code>/etc/cloud-network/cloud-network.yaml</code> — copy or symlink before first start:</p>
+<pre><code class="language-bash">sudo cp /etc/cloud-network/config.yaml /etc/cloud-network/cloud-network.yaml
+# or: sudo ln -sf /etc/cloud-network/config.yaml /etc/cloud-network/cloud-network.yaml
+</code></pre>
+<p>Edit supplementary interfaces (<code>network.interfaces.enabled</code>) for your VM&#39;s secondary NICs.</p>
+<h2>3. Start the daemon</h2>
+<pre><code class="language-bash">sudo systemctl enable --now cloud-netconfigd
+</code></pre>
+<h2>4. Verify</h2>
+<pre><code class="language-bash">cnctl status all
+curl -s http://127.0.0.1:5209/health
+curl -s http://127.0.0.1:5209/api/status
+</code></pre>
+<p><code>cnctl status all</code> prints daemon status, detected cloud provider, and local interface addresses. The local HTTP API defaults to <code>127.0.0.1:5209</code>.</p>
+<h2>Troubleshooting</h2>
+<ul>
+<li><strong><code>cnctl status</code> shows &quot;Daemon Status: not running&quot;</strong> — confirm <code>systemctl status cloud-netconfigd</code> and that port <code>5209</code> is listening on localhost.</li>
+<li><strong>Daemon exits immediately</strong> — cloud auto-detection failed; the host must be on Azure, AWS, or GCP. Check <code>journalctl -u cloud-netconfigd -n 50</code>.</li>
+<li><strong>No secondary routes</strong> — confirm <code>network.interfaces.enabled</code> lists the correct NIC names and metadata assigns those interfaces.</li>
+</ul>
+<h2>Next steps</h2>
+<ul>
+<li><a href="configuration.md">Configuration</a></li>
+<li><a href="workflows.md">Common workflows</a></li>
+<li><a href="admin-basics.md">Admin basics</a></li>
+</ul>
+<h2>Operate (CLI)</h2>
+<ol>
+<li>Confirm the unit is active: <code>systemctl is-active cloud-netconfigd</code>.</li>
+<li>Read daemon health: <code>curl -s http://127.0.0.1:5209/api/status</code>.</li>
+<li>Inspect host networking: <code>cnctl status network</code>.</li>
+<li><strong>Empty / fail:</strong> Check <code>journalctl -u cloud-netconfigd -f</code>, cloud metadata reachability, and config path (<code>cloud-network.yaml</code>).</li>
+<li><strong>Success:</strong> Status shows <code>running</code>, a provider name, and configured interfaces with addresses.</li>
+</ol>
+<hr>
+<p>cloud-netconfig is operated through <strong>cnctl</strong> and the <strong>cloud-netconfigd</strong> systemd service — there is no first-party web console.</p>
+<h2>Essentials</h2>
+<pre><code class="language-bash">cnctl status all
+cnctl status network
+cnctl apply --dry-run
+cnctl version
+curl -s http://127.0.0.1:5209/api/status
+</code></pre>
+<h2>Where to go next</h2>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Doc</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>First install</td>
+<td><a href="getting-started.md">Getting Started</a></td>
+</tr>
+<tr>
+<td>Config format</td>
+<td><a href="configuration.md">Configuration</a></td>
+</tr>
+<tr>
+<td>Day-2 jobs</td>
+<td><a href="workflows.md">Workflows</a></td>
+</tr>
+<tr>
+<td>Host / packaging</td>
+<td><a href="admin-basics.md">Admin Basics</a></td>
+</tr>
+<tr>
+<td>Topic index</td>
+<td><a href="PAGE_INDEX.md">PAGE_INDEX.md</a></td>
+</tr>
+</tbody></table>
+<h2>Operate (CLI)</h2>
+<ol>
+<li>Run <code>cnctl status all</code> after any install or config change.</li>
+<li>Use <code>cnctl apply --dry-run</code> before copying YAML to <code>/etc/cloud-network/cloud-network.yaml</code>.</li>
+<li><strong>Empty / fail:</strong> Fall back to <code>journalctl -u cloud-netconfigd</code> and the <code>/health</code> endpoint.</li>
+<li><strong>Success:</strong> Commands exit 0 and status output matches the cloud VM&#39;s metadata and interfaces.</li>
+</ol>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Fresh install</strong></td>
+<td>Clone → <code>make build</code> → <code>sudo make install</code> → symlink/copy config → <code>systemctl enable --now cloud-netconfigd</code></td>
+</tr>
+<tr>
+<td><strong>Validate</strong></td>
+<td><code>cnctl status all</code> → <code>curl http://127.0.0.1:5209/api/status</code> → <code>journalctl -u cloud-netconfigd -n 30</code></td>
+</tr>
+<tr>
+<td><strong>Config change</strong></td>
+<td>Edit YAML → <code>cnctl apply --dry-run</code> → copy to <code>cloud-network.yaml</code> → <code>systemctl restart cloud-netconfigd</code></td>
+</tr>
+<tr>
+<td><strong>Reload signal</strong></td>
+<td><code>cnctl reload</code> (prints systemd guidance) → <code>sudo systemctl reload cloud-netconfigd</code></td>
+</tr>
+<tr>
+<td><strong>Upgrade binary</strong></td>
+<td><code>systemctl stop cloud-netconfigd</code> → replace <code>/usr/bin/cloud-netconfigd</code> and <code>/usr/bin/cnctl</code> → <code>systemctl start cloud-netconfigd</code></td>
+</tr>
+<tr>
+<td><strong>Multi-interface rollout</strong></td>
+<td>Start from <code>examples/multi-interface.yaml</code> → set <code>network.interfaces.enabled</code> → enable <code>network.routing.policy_routing</code></td>
+</tr>
+</tbody></table>
+<h2>cnctl command reference</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cnctl status [system|network|all]</code></td>
+<td>Daemon, cloud provider, and interface state (default: <code>all</code>)</td>
+</tr>
+<tr>
+<td><code>cnctl apply [-c PATH] [--dry-run]</code></td>
+<td>Validate (and optionally stage) configuration</td>
+</tr>
+<tr>
+<td><code>cnctl reload [--force]</code></td>
+<td>Reload guidance (systemd reload)</td>
+</tr>
+<tr>
+<td><code>cnctl version</code></td>
+<td>CLI and license version</td>
+</tr>
+</tbody></table>
+<h2>Local HTTP API</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>GET /health</code></td>
+<td><code>OK</code></td>
+</tr>
+<tr>
+<td><code>GET /api/status</code></td>
+<td>JSON: <code>status</code>, <code>provider</code>, <code>version</code></td>
+</tr>
+<tr>
+<td><code>GET /api/cloud/status</code></td>
+<td><code>OK</code></td>
+</tr>
+</tbody></table>
+<p>Bind address comes from <code>server.listen</code> (default <code>127.0.0.1:5209</code>).</p>
+<h2>Debug metadata or routing</h2>
+<ol>
+<li>Set <code>logging.level: debug</code> in config.</li>
+<li><code>sudo systemctl restart cloud-netconfigd</code>.</li>
+<li><code>journalctl -u cloud-netconfigd -f</code>.</li>
+</ol>
+<p>Runtime state is written under <code>/run/cloud-network</code> (configurable via <code>state.directory</code>).</p>
+<h2>Operate (CLI)</h2>
+<ol>
+<li>Pick the workflow row that matches your job (install, validate, config change, upgrade).</li>
+<li>Run the listed commands in order; use <code>--dry-run</code> before any restart that changes routing.</li>
+<li>For mutating changes, schedule a maintenance window — policy routes affect egress paths.</li>
+<li><strong>Empty / fail:</strong> Capture <code>journalctl -u cloud-netconfigd</code> and <code>cnctl status network</code> before retrying.</li>
+<li><strong>Success:</strong> <code>cnctl status all</code> shows running daemon, expected provider, and addresses on supplementary NICs.</li>
+</ol>
+</main></body></html>

@@ -1,0 +1,13 @@
+#!/bin/sh
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+set -e
+
+case "$1" in
+    remove|deconfigure)
+        deb-systemd-invoke stop cloud-netconfigd.service || true
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

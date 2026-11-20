@@ -1,0 +1,33 @@
+post_install() {
+    # Create system user
+    if ! getent passwd cloud-network >/dev/null 2>&1; then
+        useradd -r -M -s /usr/bin/nologin -d /run/cloud-network cloud-network
+    fi
+
+    # Create state directory
+    mkdir -p /var/lib/cloud-netconfig
+    chown cloud-network:cloud-network /var/lib/cloud-netconfig
+
+    systemd-tmpfiles --create cloud-netconfig.conf || true
+
+    echo "==> To enable and start cloud-netconfigd:"
+    echo "    systemctl enable --now cloud-netconfigd"
+}
+
+post_upgrade() {
+    systemctl daemon-reload || true
+}
+
+pre_remove() {
+    systemctl stop cloud-netconfigd.service || true
+    systemctl disable cloud-netconfigd.service || true
+}
+
+post_remove() {
+    systemctl daemon-reload || true
+
+    # Remove user if no files owned
+    if getent passwd cloud-network >/dev/null 2>&1; then
+        userdel cloud-network 2>/dev/null || true
+    fi
+}

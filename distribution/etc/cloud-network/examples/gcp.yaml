@@ -1,0 +1,61 @@
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+# Google Cloud Platform cloud-netconfig configuration
+
+logging:
+  level: info
+  format: json  # JSON for Cloud Logging
+  timestamps: true
+
+server:
+  listen:
+    address: 127.0.0.1
+    port: 5209
+
+metadata:
+  refresh_interval: 300s
+  request_timeout: 10s
+  retry:
+    enabled: true
+    max_attempts: 3
+    backoff: 5s
+
+network:
+  interfaces:
+    # GCP secondary interfaces
+    enabled:
+      - ens4
+      - ens5
+
+  routing:
+    table_base: 9999
+    policy_routing: true
+
+  mtu:
+    auto_configure: true
+    # GCP uses 1460 for default VPC
+    # override: 1460
+
+# Force GCP provider
+cloud:
+  auto_detect: false
+  provider: gcp
+  gcp:
+    recursive: true
+
+security:
+  user: cloud-network
+  capabilities:
+    - CAP_NET_ADMIN
+  watchdog:
+    enabled: true
+    interval: 30s
+
+state:
+  directory: /run/cloud-network
+  persist_metadata: true
+  per_interface_files: true
+
+features:
+  network_events: true
+  cleanup_stale: true
+  health_check: true

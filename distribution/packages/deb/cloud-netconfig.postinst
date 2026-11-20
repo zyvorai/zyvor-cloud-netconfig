@@ -1,0 +1,29 @@
+#!/bin/sh
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+set -e
+
+case "$1" in
+    configure)
+        # Create system user
+        if ! getent passwd cloud-network >/dev/null; then
+            adduser --system --group --no-create-home \
+                --home /run/cloud-network \
+                --gecos "Cloud Network Configuration Daemon" \
+                cloud-network
+        fi
+
+        # Create state directory
+        mkdir -p /var/lib/cloud-netconfig
+        chown cloud-network:cloud-network /var/lib/cloud-netconfig
+
+        # Reload systemd
+        systemctl daemon-reload || true
+
+        # Enable service (but don't start automatically)
+        deb-systemd-helper enable cloud-netconfigd.service || true
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

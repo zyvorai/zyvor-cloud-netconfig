@@ -1,0 +1,29 @@
+Source: cloud-netconfig
+Section: net
+Priority: optional
+Maintainer: ZyvorAI Labs Private Limited <legal@zyvor.dev>
+Build-Depends: debhelper-compat (= 13),
+               cargo,
+               rustc (>= 1.70)
+Standards-Version: 4.6.2
+Homepage: https://github.com/ssahani/cloud-netconfig
+Vcs-Git: https://github.com/ssahani/cloud-netconfig.git
+Vcs-Browser: https://github.com/ssahani/cloud-netconfig
+Rules-Requires-Root: no
+
+Package: cloud-netconfig
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Cloud instance network configuration daemon
+ Automatically configures network interfaces for cloud instances by fetching
+ metadata from cloud providers (AWS, Azure, GCP, Oracle Cloud, Alibaba Cloud,
+ DigitalOcean).
+ .
+ Features:
+  * Automatic cloud provider detection
+  * Dynamic network interface configuration
+  * Support for multiple network interfaces
+  * Policy-based routing for supplementary interfaces
+  * Systemd integration with watchdog support
+  * Configurable refresh intervals
+  * HTTP API for status monitoring

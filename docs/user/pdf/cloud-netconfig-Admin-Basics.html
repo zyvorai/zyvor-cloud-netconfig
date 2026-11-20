@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>Admin Basics — cloud-netconfig</title>
+<style>
+@page{size:A4;margin:15mm 16mm}*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Segoe UI',system-ui,sans-serif;color:#1f2937;line-height:1.58;font-size:10.5pt}
+.cover{height:262mm;margin:-15mm -16mm 0;background:linear-gradient(135deg,#042f2e,#115e59,#0d1b2a);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;page-break-after:always;position:relative}
+.cover .kicker{letter-spacing:5px;text-transform:uppercase;opacity:.72;margin-bottom:1.4em}
+.cover h1{font-size:3.2em;font-weight:800;letter-spacing:-2px}
+.cover h1 span{color:#3FD0E8}
+.cover .sub{font-size:1.3em;font-weight:300;opacity:.93;margin:1em 0;max-width:24em}
+.cover .badge{display:inline-block;background:rgba(96,165,250,.2);border:1px solid #3FD0E8;padding:8px 22px;border-radius:20px;margin-top:2em}
+.cover .foot{position:absolute;bottom:34px;font-size:.82em;opacity:.6}
+h2{page-break-before:always;margin:0 0 .35em;font-size:1.55em;font-weight:750;color:#12203a;border-bottom:2px solid #e5edfb;padding-bottom:.28em}
+h2:first-of-type{page-break-before:avoid}
+h3{margin:1.1em 0 .4em;font-size:1.12em;font-weight:700}
+p,li{margin:.4em 0}ul,ol{margin:.5em 0 .9em 1.4em}
+a{color:#2563eb;text-decoration:none}
+code{background:#eef2f7;padding:1px 6px;border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,monospace}
+pre{background:#0f172a;color:#e2e8f0;padding:12px 15px;border-radius:9px;overflow-x:auto;margin:.8em 0}
+table{width:100%;border-collapse:collapse;margin:.8em 0 1.1em;font-size:9.5pt}
+th,td{border:1px solid #e5e7eb;padding:6px 8px;text-align:left;vertical-align:top}th{background:#f1f5f9}
+hr{border:none;border-top:1px solid #e5e7eb;margin:1.2em 0}
+</style></head><body>
+<section class="cover"><div class="kicker">ZyvorAI Labs · User Documentation</div>
+<h1>cloud-<span>netconfig</span></h1>
+<div class="sub">Admin Basics</div>
+<div class="badge">2026-08-29</div>
+<div class="foot">zyvor.dev · Confidential — for licensed users</div></section>
+<main><table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Guidance</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Binaries</strong></td>
+<td><code>/usr/bin/cloud-netconfigd</code> (daemon), <code>/usr/bin/cnctl</code> (CLI)</td>
+</tr>
+<tr>
+<td><strong>Service</strong></td>
+<td><code>cloud-netconfigd.service</code> — <code>Type=notify</code>, watchdog enabled, <code>CAP_NET_ADMIN</code></td>
+</tr>
+<tr>
+<td><strong>Config dir</strong></td>
+<td><code>/etc/cloud-network/</code> — active daemon config: <code>cloud-network.yaml</code></td>
+</tr>
+<tr>
+<td><strong>Runtime state</strong></td>
+<td><code>/run/cloud-network/</code> (metadata cache, per-interface files when enabled)</td>
+</tr>
+<tr>
+<td><strong>Logs</strong></td>
+<td><code>journalctl -u cloud-netconfigd -f</code></td>
+</tr>
+<tr>
+<td><strong>User</strong></td>
+<td>Drops to <code>cloud-network</code> system user after startup when run as root</td>
+</tr>
+<tr>
+<td><strong>Local API</strong></td>
+<td><code>127.0.0.1:5209</code> by default — not exposed beyond localhost unless you change <code>server.listen</code></td>
+</tr>
+<tr>
+<td><strong>Examples</strong></td>
+<td><code>/usr/share/doc/cloud-netconfig/examples/</code> after package install</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>Follow upstream <code>SECURITY.md</code>; restrict config file permissions (<code>0644</code>, root-owned)</td>
+</tr>
+<tr>
+<td><strong>Support</strong></td>
+<td><a href="https://github.com/zyvorai/zyvor-cloud-netconfig/issues">GitHub Issues</a> · <a href="https://zyvor.dev/contact">Contact Zyvor</a> for Enterprise</td>
+</tr>
+</tbody></table>
+<h2>systemd essentials</h2>
+<pre><code class="language-bash">sudo systemctl enable --now cloud-netconfigd
+sudo systemctl status cloud-netconfigd
+sudo systemctl restart cloud-netconfigd
+sudo journalctl -u cloud-netconfigd -f
+</code></pre>
+<p>The unit uses <code>WatchdogSec=60s</code> and expects the daemon to ping systemd when <code>security.watchdog.enabled</code> is true in config.</p>
+<h2>Packaging paths</h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Installed path</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Daemon + CLI</td>
+<td><code>/usr/bin/</code></td>
+</tr>
+<tr>
+<td>Default config example</td>
+<td><code>/etc/cloud-network/config.yaml</code></td>
+</tr>
+<tr>
+<td>systemd unit</td>
+<td><code>/lib/systemd/system/cloud-netconfigd.service</code></td>
+</tr>
+<tr>
+<td>Shell completions</td>
+<td>bash, zsh, fish under <code>/usr/share/</code></td>
+</tr>
+</tbody></table>
+<p>DEB/RPM/Arch packages follow the same layout — see <code>distribution/README.md</code> in the repository.</p>
+<h2>Privileges</h2>
+<p>The daemon starts as root, creates state directories, then drops to <code>cloud-network</code> while retaining <code>CAP_NET_ADMIN</code> for netlink route and address operations.</p>
+<p>See also <a href="getting-started.md">Getting started</a>.</p>
+<h2>Operate (CLI)</h2>
+<ol>
+<li>Treat <code>cloud-netconfigd.service</code> as the source of truth for process health.</li>
+<li>Use the local API only from the host (<code>curl</code> to <code>127.0.0.1:5209</code>) — do not expose the port publicly without TLS and auth.</li>
+<li>After upgrades, run <code>cnctl version</code> and compare with <code>/api/status</code> JSON.</li>
+<li><strong>Empty / fail:</strong> Inspect unit logs and confirm the <code>cloud-network</code> user exists.</li>
+<li><strong>Success:</strong> Service is <code>active (running)</code> and watchdog notifications stay healthy in <code>journalctl</code>.</li>
+</ol>
+</main></body></html>

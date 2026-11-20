@@ -1,0 +1,380 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>Page-by-Page Product Manual — cloud-netconfig</title>
+<style>
+@page{size:A4;margin:15mm 16mm}*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Segoe UI',system-ui,sans-serif;color:#1f2937;line-height:1.58;font-size:10.5pt}
+.cover{height:262mm;margin:-15mm -16mm 0;background:linear-gradient(135deg,#042f2e,#115e59,#0d1b2a);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;page-break-after:always;position:relative}
+.cover .kicker{letter-spacing:5px;text-transform:uppercase;opacity:.72;margin-bottom:1.4em}
+.cover h1{font-size:3.2em;font-weight:800;letter-spacing:-2px}
+.cover h1 span{color:#3FD0E8}
+.cover .sub{font-size:1.3em;font-weight:300;opacity:.93;margin:1em 0;max-width:24em}
+.cover .badge{display:inline-block;background:rgba(96,165,250,.2);border:1px solid #3FD0E8;padding:8px 22px;border-radius:20px;margin-top:2em}
+.cover .foot{position:absolute;bottom:34px;font-size:.82em;opacity:.6}
+h2{page-break-before:always;margin:0 0 .35em;font-size:1.55em;font-weight:750;color:#12203a;border-bottom:2px solid #e5edfb;padding-bottom:.28em}
+h2:first-of-type{page-break-before:avoid}
+h3{margin:1.1em 0 .4em;font-size:1.12em;font-weight:700}
+p,li{margin:.4em 0}ul,ol{margin:.5em 0 .9em 1.4em}
+a{color:#2563eb;text-decoration:none}
+code{background:#eef2f7;padding:1px 6px;border-radius:4px;font-size:.86em;font-family:ui-monospace,Menlo,monospace}
+pre{background:#0f172a;color:#e2e8f0;padding:12px 15px;border-radius:9px;overflow-x:auto;margin:.8em 0}
+table{width:100%;border-collapse:collapse;margin:.8em 0 1.1em;font-size:9.5pt}
+th,td{border:1px solid #e5e7eb;padding:6px 8px;text-align:left;vertical-align:top}th{background:#f1f5f9}
+hr{border:none;border-top:1px solid #e5e7eb;margin:1.2em 0}
+</style></head><body>
+<section class="cover"><div class="kicker">ZyvorAI Labs · User Documentation</div>
+<h1>cloud-<span>netconfig</span></h1>
+<div class="sub">Page-by-Page Product Manual</div>
+<div class="badge">2026-08-29</div>
+<div class="foot">zyvor.dev · Confidential — for licensed users</div></section>
+<main><h2>Page-by-page guides</h2>
+<p>Each guide follows: Purpose → When to use it → How to get there → What you can do → Related pages.</p>
+<p>Every route is also listed in the <a href="../PAGE_INDEX.md">complete page index</a>.</p>
+<h3>Admin</h3>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>What it covers</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="admin/admin-basics.md">Admin Basics</a></td>
+<td>Packaging, systemd unit, local HTTP API, privileges, and ops.</td>
+</tr>
+</tbody></table>
+<h3>Onboarding</h3>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>What it covers</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="onboarding/getting-started.md">Getting Started</a></td>
+<td>Install cloud-netconfigd and verify metadata-driven networking on a cloud VM.</td>
+</tr>
+</tbody></table>
+<h3>Operations</h3>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>What it covers</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="operations/workflows.md">Workflows</a></td>
+<td>Day-2 validate, reload, multi-interface rollout, and upgrade jobs with cnctl.</td>
+</tr>
+</tbody></table>
+<h3>Setup</h3>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>What it covers</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="setup/configuration.md">Configuration</a></td>
+<td>YAML daemon config: logging, metadata refresh, supplementary interfaces, and routing.</td>
+</tr>
+</tbody></table>
+<hr>
+<p>4 guides. Regenerate: <code>node scripts/user-docs/generate-guide-index.mjs</code>.</p>
+<hr>
+<h2>Admin Basics</h2>
+<h3>Purpose</h3>
+<p>Packaging, systemd unit, local HTTP API, privileges, and ops.</p>
+<h3>How to get there</h3>
+<ul>
+<li>Topic id: <code>admin-basics</code></li>
+<li>Section: <strong>Admin → Admin Basics</strong></li>
+</ul>
+<h3>Guide</h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Unit</strong></td>
+<td><code>cloud-netconfigd.service</code> — notify type, watchdog, hardened syscall filter</td>
+</tr>
+<tr>
+<td><strong>Capabilities</strong></td>
+<td><code>CAP_NET_ADMIN</code> only after privilege drop</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td><code>/health</code>, <code>/api/status</code>, <code>/api/cloud/status</code> on <code>server.listen</code></td>
+</tr>
+<tr>
+<td><strong>State</strong></td>
+<td><code>/run/cloud-network</code> — metadata persistence when <code>state.persist_metadata: true</code></td>
+</tr>
+<tr>
+<td><strong>Completions</strong></td>
+<td>bash, zsh, fish installed under <code>/usr/share/</code></td>
+</tr>
+</tbody></table>
+<h3>Logs and service control</h3>
+<pre><code class="language-bash">sudo systemctl status cloud-netconfigd
+sudo journalctl -u cloud-netconfigd -f
+</code></pre>
+<h3>Security notes</h3>
+<ul>
+<li>Keep the HTTP listener on localhost unless you add TLS and access controls.</li>
+<li>Restrict <code>/etc/cloud-network/*.yaml</code> to root-readable permissions.</li>
+<li>Review <code>SECURITY.md</code> before exposing metadata-derived routes on shared tenants.</li>
+</ul>
+<h3>Operate (CLI)</h3>
+<ol>
+<li>Monitor via systemd and journald — there is no remote metrics endpoint in cloud-netconfig.</li>
+<li>After package upgrades, verify <code>systemctl cat cloud-netconfigd</code> matches shipped unit file.</li>
+<li><strong>Empty / fail:</strong> Check <code>cloud-network</code> user exists and <code>/run/cloud-network</code> is writable.</li>
+<li><strong>Success:</strong> Watchdog stays healthy; API returns <code>running</code> status.</li>
+</ol>
+<h3>Related pages</h3>
+<ul>
+<li><a href="../../getting-started.md">Getting Started</a></li>
+<li><a href="../../PAGE_INDEX.md">Page index</a></li>
+</ul>
+<hr>
+<h2>Getting Started</h2>
+<h3>Purpose</h3>
+<p>Install cloud-netconfigd and verify metadata-driven networking on a cloud VM.</p>
+<h3>How to get there</h3>
+<ul>
+<li>Topic id: <code>getting-started</code></li>
+<li>Section: <strong>Onboarding → Getting Started</strong></li>
+</ul>
+<h3>Guide</h3>
+<p>cloud-netconfig runs as a systemd daemon on Azure, AWS EC2, or GCP VMs. It watches instance metadata and netlink events, then configures supplementary interfaces, custom routing tables, and policy rules so multi-homed hosts route correctly.</p>
+<h3>Prerequisites</h3>
+<ul>
+<li>A cloud VM with secondary network interfaces attached in the provider console.</li>
+<li>Rust toolchain and <code>make</code> for source builds, or a packaged release from GitHub.</li>
+<li>sudo/root for install and route management.</li>
+</ul>
+<h3>Install and enable</h3>
+<pre><code class="language-bash">git clone https://github.com/zyvorai/zyvor-cloud-netconfig.git
+cd zyvor-cloud-netconfig
+make build &amp;&amp; sudo make install
+sudo cp /etc/cloud-network/config.yaml /etc/cloud-network/cloud-network.yaml
+sudo systemctl enable --now cloud-netconfigd
+</code></pre>
+<h3>First verification</h3>
+<pre><code class="language-bash">cnctl status all
+curl -s http://127.0.0.1:5209/api/status | jq .
+</code></pre>
+<h3>Troubleshooting</h3>
+<ul>
+<li><strong>Service fails on bare metal or non-cloud VMs</strong> — auto-detection requires provider metadata; use a supported cloud instance for testing.</li>
+<li><strong>Config not loaded</strong> — ensure <code>cloud-network.yaml</code> exists (see <a href="../setup/configuration.md">Configuration</a>).</li>
+</ul>
+<h3>Next steps</h3>
+<ul>
+<li><a href="../setup/configuration.md">Configuration</a></li>
+<li><a href="../operations/workflows.md">Common workflows</a></li>
+<li><a href="../admin/admin-basics.md">Admin basics</a></li>
+</ul>
+<h3>Operate (CLI)</h3>
+<ol>
+<li>After install, run <code>cnctl status all</code> before changing production routing.</li>
+<li>Confirm <code>/api/status</code> returns <code>&quot;status&quot;:&quot;running&quot;</code> and the expected provider string.</li>
+<li><strong>Empty / fail:</strong> Read <code>journalctl -u cloud-netconfigd</code> for metadata or netlink errors.</li>
+<li><strong>Success:</strong> Secondary NICs listed in config show addresses and policy routes in <code>ip rule</code> / <code>ip route show table</code>.</li>
+</ol>
+<h3>Related pages</h3>
+<ul>
+<li><a href="../../getting-started.md">Getting Started</a></li>
+<li><a href="../../PAGE_INDEX.md">Page index</a></li>
+</ul>
+<hr>
+<h2>Workflows</h2>
+<h3>Purpose</h3>
+<p>Day-2 validate, reload, multi-interface rollout, and upgrade jobs with cnctl.</p>
+<h3>How to get there</h3>
+<ul>
+<li>Topic id: <code>workflows</code></li>
+<li>Section: <strong>Operations → Workflows</strong></li>
+</ul>
+<h3>Guide</h3>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Commands</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Health check</td>
+<td><code>cnctl status all</code> · <code>curl http://127.0.0.1:5209/health</code></td>
+</tr>
+<tr>
+<td>Config rollout</td>
+<td><code>cnctl apply --dry-run</code> → copy YAML → <code>systemctl restart cloud-netconfigd</code></td>
+</tr>
+<tr>
+<td>Reload</td>
+<td><code>sudo systemctl reload cloud-netconfigd</code> (after <code>cnctl reload</code> reminder)</td>
+</tr>
+<tr>
+<td>Debug</td>
+<td>Set <code>logging.level: debug</code> → restart → <code>journalctl -u cloud-netconfigd -f</code></td>
+</tr>
+<tr>
+<td>Upgrade</td>
+<td>Stop service → replace binaries → start → <code>cnctl version</code></td>
+</tr>
+</tbody></table>
+<h3>Multi-interface rollout</h3>
+<ol>
+<li>Attach secondary NICs in the cloud console.</li>
+<li>Copy <code>examples/multi-interface.yaml</code> and set <code>network.interfaces.enabled</code>.</li>
+<li>Validate with dry-run, restart daemon, confirm routes with <code>ip rule</code> and <code>ip route show table 9999</code> (or your <code>table_base</code>).</li>
+</ol>
+<h3>Operate (CLI)</h3>
+<ol>
+<li>Prefer dry-run and journal inspection before restarting on production multi-homed hosts.</li>
+<li>Use <code>cnctl status network</code> to confirm netlink state matches provider metadata.</li>
+<li><strong>Empty / fail:</strong> Capture logs and metadata connectivity (IMDS/GCP metadata endpoints).</li>
+<li><strong>Success:</strong> Traffic egresses via the intended interface per policy rules.</li>
+</ol>
+<h3>Related pages</h3>
+<ul>
+<li><a href="../../getting-started.md">Getting Started</a></li>
+<li><a href="../../PAGE_INDEX.md">Page index</a></li>
+</ul>
+<hr>
+<h2>Configuration</h2>
+<h3>Purpose</h3>
+<p>YAML daemon config: logging, metadata refresh, supplementary interfaces, and routing.</p>
+<h3>How to get there</h3>
+<ul>
+<li>Topic id: <code>configuration</code></li>
+<li>Section: <strong>Setup → Configuration</strong></li>
+</ul>
+<h3>Guide</h3>
+<p>All daemon behaviour is driven by <code>/etc/cloud-network/cloud-network.yaml</code>. Key knobs:</p>
+<ul>
+<li><strong><code>network.interfaces.enabled</code></strong> — supplementary NICs to configure from metadata.</li>
+<li><strong><code>network.routing</code></strong> — custom table base (<code>table_base</code>), policy routing, default route management.</li>
+<li><strong><code>metadata.refresh_interval</code></strong> — how often metadata is re-fetched (default <code>300s</code>).</li>
+<li><strong><code>cloud.*</code></strong> — auto-detect or pin provider; tune Azure API version, AWS IMDSv1/v2, GCP recursive fetch.</li>
+</ul>
+<p>Copy a provider example from <code>distribution/etc/cloud-network/examples/</code> as a starting point.</p>
+<h3>Validate</h3>
+<pre><code class="language-bash">cnctl apply --dry-run
+cnctl apply --dry-run -c distribution/etc/cloud-network/examples/aws.yaml
+</code></pre>
+<h3>Apply</h3>
+<pre><code class="language-bash">sudo cp my.yaml /etc/cloud-network/cloud-network.yaml
+sudo systemctl restart cloud-netconfigd
+</code></pre>
+<h3>Troubleshooting</h3>
+<ul>
+<li><strong>MTU override ignored</strong> — the schema field is <code>mtu.override_value</code> (see annotated <code>config.yaml</code>).</li>
+<li><strong>Daemon ignores edits</strong> — wrong filename; active path is <code>cloud-network.yaml</code>, not only the packaged <code>config.yaml</code>.</li>
+</ul>
+<h3>Next steps</h3>
+<ul>
+<li><a href="../onboarding/getting-started.md">Getting started</a></li>
+<li><a href="../operations/workflows.md">Common workflows</a></li>
+<li><a href="../admin/admin-basics.md">Admin basics</a></li>
+</ul>
+<h3>Operate (CLI)</h3>
+<ol>
+<li>Stage changes in a non-production path; always <code>--dry-run</code> first.</li>
+<li>Diff against examples for your cloud (<code>aws.yaml</code>, <code>azure.yaml</code>, <code>gcp.yaml</code>).</li>
+<li><strong>Empty / fail:</strong> Dry-run stderr shows YAML parse or duration validation errors.</li>
+<li><strong>Success:</strong> Restart completes; <code>cnctl status network</code> reflects new interfaces.</li>
+</ol>
+<h3>Related pages</h3>
+<ul>
+<li><a href="../../getting-started.md">Getting Started</a></li>
+<li><a href="../../PAGE_INDEX.md">Page index</a></li>
+</ul>
+<hr>
+<h2>cloud-netconfig — Complete page index</h2>
+<p>Every primary navigable dashboard route.</p>
+<p><em>Generated: 2026-08-29 · 4 routes</em></p>
+<p>Regenerate: <code>node scripts/user-docs/generate-page-index.mjs</code></p>
+<h3>Onboarding</h3>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Route</th>
+<th>Purpose</th>
+<th>Guide</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Getting Started</td>
+<td><code>getting-started</code></td>
+<td>Install cloud-netconfigd and verify metadata-driven networking on a cloud VM.</td>
+<td><a href="pages/onboarding/getting-started.md">Open</a></td>
+</tr>
+</tbody></table>
+<h3>Setup</h3>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Route</th>
+<th>Purpose</th>
+<th>Guide</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Configuration</td>
+<td><code>configuration</code></td>
+<td>YAML daemon config: logging, metadata refresh, supplementary interfaces, and routing.</td>
+<td><a href="pages/setup/configuration.md">Open</a></td>
+</tr>
+</tbody></table>
+<h3>Operations</h3>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Route</th>
+<th>Purpose</th>
+<th>Guide</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Workflows</td>
+<td><code>workflows</code></td>
+<td>Day-2 validate, reload, multi-interface rollout, and upgrade jobs with cnctl.</td>
+<td><a href="pages/operations/workflows.md">Open</a></td>
+</tr>
+</tbody></table>
+<h3>Admin</h3>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Route</th>
+<th>Purpose</th>
+<th>Guide</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Admin Basics</td>
+<td><code>admin-basics</code></td>
+<td>Packaging, systemd unit, local HTTP API, privileges, and ops.</td>
+<td><a href="pages/admin/admin-basics.md">Open</a></td>
+</tr>
+</tbody></table>
+<h3>Related</h3>
+<ul>
+<li><a href="README.md">User docs home</a></li>
+<li><a href="pages/README.md">Page-by-page guides</a></li>
+</ul>
+</main></body></html>

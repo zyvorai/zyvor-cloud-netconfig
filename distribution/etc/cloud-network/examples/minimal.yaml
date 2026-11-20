@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+# Minimal cloud-netconfig configuration
+
+# Basic logging
+logging:
+  level: info
+  format: text
+
+# Server defaults
+server:
+  listen:
+    address: 127.0.0.1
+    port: 5209
+
+# Auto-detect and use defaults for everything else

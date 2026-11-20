@@ -1,0 +1,15 @@
+# Binaries
+target/release/cloud-netconfigd usr/bin/
+target/release/cnctl usr/bin/
+
+# Configuration
+distribution/etc/cloud-network/config.yaml etc/cloud-network/
+distribution/etc/cloud-network/examples/* usr/share/doc/cloud-netconfig/examples/
+
+# Systemd
+distribution/lib/systemd/system/cloud-netconfigd.service lib/systemd/system/
+
+# Completions
+distribution/usr/share/bash-completion/completions/cnctl usr/share/bash-completion/completions/
+distribution/usr/share/zsh/site-functions/_cnctl usr/share/zsh/site-functions/
+distribution/usr/share/fish/vendor_completions.d/cnctl.fish usr/share/fish/vendor_completions.d/

@@ -1,0 +1,149 @@
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+# Cloud Network Configuration
+# https://github.com/your-org/cloud-netconfig
+
+# Logging configuration
+logging:
+  # Log level: trace, debug, info, warn, error
+  level: info
+
+  # Output format: text, json
+  format: text
+
+  # Log to file (optional, logs to stdout if not specified)
+  # file: /var/log/cloud-network/cloud-network.log
+
+  # Enable timestamps in logs
+  timestamps: false
+
+# Server configuration
+server:
+  # HTTP API server listen address
+  listen:
+    address: 127.0.0.1
+    port: 5209
+
+  # Enable TLS (optional)
+  # tls:
+  #   enabled: false
+  #   cert_file: /etc/cloud-network/tls/cert.pem
+  #   key_file: /etc/cloud-network/tls/key.pem
+
+# Metadata refresh configuration
+metadata:
+  # How often to refresh metadata from cloud provider
+  refresh_interval: 300s
+
+  # Timeout for metadata requests
+  request_timeout: 10s
+
+  # Retry configuration
+  retry:
+    enabled: true
+    max_attempts: 3
+    backoff: 5s
+
+# Network configuration
+network:
+  # Supplementary network interfaces to configure
+  # These interfaces will get routing rules and gateway configuration
+  interfaces:
+    # Configure specific interfaces by name
+    # enabled: []
+    # Example:
+    # enabled:
+    #   - eth1
+    #   - eth2
+
+    # Or use patterns
+    # patterns:
+    #   - eth*
+    #   - ens*
+
+  # Configure primary interface
+  primary:
+    enabled: true
+    # Force specific interface as primary (optional)
+    # interface: eth0
+
+  # Routing configuration
+  routing:
+    # Base routing table number for custom tables
+    table_base: 9999
+
+    # Enable policy-based routing
+    policy_routing: true
+
+    # Manage default routes
+    manage_default_routes: true
+
+  # MTU configuration
+  mtu:
+    # Auto-configure MTU from cloud metadata
+    auto_configure: true
+
+    # Override MTU for all interfaces (optional)
+    # override: 1500
+
+# Cloud provider specific settings
+cloud:
+  # Auto-detect cloud provider (recommended)
+  auto_detect: true
+
+  # Force specific cloud provider (optional)
+  # provider: azure  # Options: azure, aws, gcp, alibaba, oracle, digitalocean
+
+  # Provider-specific configuration
+  azure:
+    # Azure Instance Metadata Service API version
+    api_version: "2021-02-01"
+
+  aws:
+    # EC2 metadata service version (1 or 2)
+    imds_version: 1
+
+    # Session token TTL for IMDSv2 (seconds)
+    # token_ttl: 21600
+
+  gcp:
+    # Use recursive metadata fetch
+    recursive: true
+
+# Security and permissions
+security:
+  # Run as specific user (drops privileges from root)
+  user: cloud-network
+
+  # Capabilities to retain (Linux capabilities)
+  capabilities:
+    - CAP_NET_ADMIN
+
+  # Enable systemd watchdog
+  watchdog:
+    enabled: true
+    interval: 30s
+
+# State management
+state:
+  # Directory for runtime state
+  directory: /run/cloud-network
+
+  # Save metadata to disk
+  persist_metadata: true
+
+  # Per-interface metadata files
+  per_interface_files: true
+
+# Advanced features
+features:
+  # Enable network event watching (netlink monitoring)
+  network_events: true
+
+  # Automatically remove stale configuration
+  cleanup_stale: true
+
+  # IPv6 support (future)
+  ipv6: false
+
+  # Health check endpoint
+  health_check: true

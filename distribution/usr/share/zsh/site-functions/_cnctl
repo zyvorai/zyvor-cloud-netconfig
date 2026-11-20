@@ -1,0 +1,57 @@
+#compdef cnctl
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+# zsh completion for cnctl
+
+_cnctl() {
+    local -a commands
+    commands=(
+        'status:Show status information'
+        'apply:Apply configuration from file'
+        'reload:Reload daemon configuration'
+        'version:Show daemon version'
+        'help:Show help information'
+    )
+
+    local -a status_targets
+    status_targets=(
+        'system:Show cloud system information'
+        'network:Show network interface information'
+        'all:Show all status information'
+    )
+
+    _arguments -C \
+        '1: :->command' \
+        '*:: :->args'
+
+    case $state in
+        command)
+            _describe 'command' commands
+            ;;
+        args)
+            case $words[1] in
+                status)
+                    _arguments \
+                        '1: :->target'
+                    case $state in
+                        target)
+                            _describe 'target' status_targets
+                            ;;
+                    esac
+                    ;;
+                apply)
+                    _arguments \
+                        '(-c --config)'{-c,--config}'[Configuration file path]:file:_files -g "*.yaml"' \
+                        '(-d --dry-run)'{-d,--dry-run}'[Dry-run mode (validate only)]' \
+                        '(-h --help)'{-h,--help}'[Show help information]'
+                    ;;
+                reload)
+                    _arguments \
+                        '(-f --force)'{-f,--force}'[Force reload even if config hasnt changed]' \
+                        '(-h --help)'{-h,--help}'[Show help information]'
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+_cnctl "$@"

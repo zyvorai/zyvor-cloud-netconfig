@@ -1,0 +1,6 @@
+{
+  "getting-started": "Install cloud-netconfigd and verify metadata-driven networking on a cloud VM.",
+  "configuration": "YAML daemon config: logging, metadata refresh, supplementary interfaces, and routing.",
+  "workflows": "Day-2 validate, reload, multi-interface rollout, and upgrade jobs with cnctl.",
+  "admin-basics": "Packaging, systemd unit, local HTTP API, privileges, and ops."
+}

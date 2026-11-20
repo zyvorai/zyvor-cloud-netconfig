@@ -1,0 +1,57 @@
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+# Multi-interface cloud-netconfig configuration
+
+logging:
+  level: debug
+  format: text
+
+server:
+  listen:
+    address: 127.0.0.1
+    port: 5209
+
+metadata:
+  refresh_interval: 300s
+  request_timeout: 10s
+
+# Configure secondary interfaces
+network:
+  interfaces:
+    enabled:
+      - eth1
+      - eth2
+      - eth3
+    # Or use patterns
+    # patterns:
+    #   - eth*
+    #   - ens*
+
+  primary:
+    enabled: true
+
+  routing:
+    table_base: 9999
+    policy_routing: true
+    manage_default_routes: true
+
+  mtu:
+    auto_configure: true
+
+# Cloud auto-detection
+cloud:
+  auto_detect: true
+
+# Security
+security:
+  user: cloud-network
+  capabilities:
+    - CAP_NET_ADMIN
+  watchdog:
+    enabled: true
+    interval: 30s
+
+# Features
+features:
+  network_events: true
+  cleanup_stale: true
+  health_check: true

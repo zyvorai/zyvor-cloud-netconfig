@@ -1,0 +1,26 @@
+#!/bin/sh
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+set -e
+
+case "$1" in
+    purge)
+        # Remove user
+        if getent passwd cloud-network >/dev/null; then
+            deluser --system cloud-network || true
+        fi
+
+        # Remove state directory
+        rm -rf /var/lib/cloud-netconfig
+
+        # Remove systemd service
+        systemctl daemon-reload || true
+        ;;
+
+    remove)
+        systemctl daemon-reload || true
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0
