@@ -12,7 +12,7 @@ cloud-netconfig applies secondary IPs and policy routing from Azure, AWS EC2, an
 
 ```bash
 git clone https://github.com/hypersdk/cloud-netconfig.git
-cd cloud-netconfig
+cd zyvor-cloud-netconfig
 make build
 sudo make install
 sudo useradd -M -s /usr/bin/nologin cloud-network 2>/dev/null || true
