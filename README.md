@@ -65,7 +65,7 @@ Requirements: a Linux cloud VM on Azure, AWS or GCP, a Rust toolchain, and syste
 
 ```bash
 git clone https://github.com/hypersdk/cloud-netconfig.git
-cd cloud-netconfig
+cd zyvor-cloud-netconfig
 make build
 sudo make install
 sudo useradd -M -s /usr/bin/nologin cloud-network 2>/dev/null || true

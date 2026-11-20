@@ -1,6 +1,6 @@
 # cloud-netconfig: support subscriptions
 
-cloud-netconfig is source-available software. Running it requires a commercial license from Zyvor (sales@zyvor.dev).
+cloud-netconfig is source-available software. Zyvor Production License v1.0: non-production use is free; production use requires a commercial license from Zyvor (sales@zyvor.dev).
 
 Teams that want supported releases and defined response targets can buy an annual **support subscription** from Zyvor.
 
