@@ -1,12 +1,11 @@
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
 
 Name:           cloud-netconfig
 Version:        0.3.0
 Release:        1%{?dist}
 Summary:        Cloud instance network configuration daemon
 
-License:        Apache-2.0
-URL:            https://github.com/ssahani/cloud-netconfig
+License:        LicenseRef-Zyvor-Production-1.0URL:            https://github.com/ssahani/cloud-netconfig
 Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  cargo

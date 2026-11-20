@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: Apache-2.0
+// SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
 
 use axum::{routing::get, Router};
 use cloud_netconfig::*;

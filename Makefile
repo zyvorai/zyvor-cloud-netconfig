@@ -1,5 +1,5 @@
 # Copyright 2026 Zyvor AI Labs · https://zyvor.dev
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
 HASH := $(shell git rev-parse --short HEAD)
 COMMIT_DATE := $(shell git show -s --format=%ci ${HASH})
 BUILD_DATE := $(shell date '+%Y-%m-%d %H:%M:%S')
