@@ -84,7 +84,7 @@ function TrustBand() {
         <Reveal className={styles.trustGrid}>
           <div>
             <Heading as="h3" className={styles.sectionHeading}>
-              Source-available, Community Edition
+              Source-available
             </Heading>
             <p>
               Daemon under the Zyvor Production License, maintained by Zyvor AI Labs.
@@ -93,7 +93,7 @@ function TrustBand() {
               HyperSDK migration/operations integration on the same
               codebase.
             </p>
-            <Link to="/docs/enterprise">See Community vs. Enterprise →</Link>
+            <Link to="/docs/enterprise">See what Enterprise includes →</Link>
           </div>
           <div className={styles.trustBadges}>
             <img
@@ -120,8 +120,7 @@ function EnterpriseCTA() {
             Need supported multi-cloud rollouts?
           </Heading>
           <p className={styles.enterpriseCopy}>
-            Community Edition is free for non-production use; production use
-            needs a commercial license. Zyvor Enterprise
+            Running cloud-netconfig requires a commercial license. Zyvor Enterprise
             adds SLAs, professional services, and HyperSDK migration
             integration for production multi-cloud fleets.
           </p>

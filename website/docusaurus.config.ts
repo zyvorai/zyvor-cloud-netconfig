@@ -109,7 +109,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Zyvor AI Labs. cloud-netconfig Community Edition is licensed under the Zyvor Production License v1.0.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Zyvor AI Labs. cloud-netconfig is licensed under the Zyvor Production License v1.0.`,
     },
     prism: {
       theme: prismThemes.github,

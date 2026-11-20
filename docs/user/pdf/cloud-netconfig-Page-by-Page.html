@@ -133,7 +133,7 @@ sudo journalctl -u cloud-netconfigd -f
 </ul>
 <h3>Operate (CLI)</h3>
 <ol>
-<li>Monitor via systemd and journald — there is no remote metrics endpoint in Community Edition.</li>
+<li>Monitor via systemd and journald — there is no remote metrics endpoint in cloud-netconfig.</li>
 <li>After package upgrades, verify <code>systemctl cat cloud-netconfigd</code> matches shipped unit file.</li>
 <li><strong>Empty / fail:</strong> Check <code>cloud-network</code> user exists and <code>/run/cloud-network</code> is writable.</li>
 <li><strong>Success:</strong> Watchdog stays healthy; API returns <code>running</code> status.</li>

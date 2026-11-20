@@ -12,10 +12,10 @@
 
 | Layer | Governs |
 |-------|---------|
-| **[LICENSE.txt](LICENSE.txt)** | Cloud NetConfig **software** — Zyvor Production License v1.0 (Community Edition; source-available) |
+| **[LICENSE.txt](LICENSE.txt)** | Cloud NetConfig **software** — Zyvor Production License v1.0 (source-available) |
 | **This document** | **Zyvor-branded** builds, binaries, user bundles, and zyvor.dev distribution |
 
-You must comply with **both**. The Zyvor Production License v1.0 controls use of the **Community Edition software**; this document covers **brand, distribution, and commercial relationship** with Zyvor.
+You must comply with **both**. The Zyvor Production License v1.0 controls use of the **software**; this document covers **brand, distribution, and commercial relationship** with Zyvor.
 
 ## 2. Acceptance
 

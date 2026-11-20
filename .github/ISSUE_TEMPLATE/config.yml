@@ -2,7 +2,7 @@ blank_issues_enabled: false
 contact_links:
   - name: "Sponsor development (Razorpay)"
     url: https://rzp.io/rzp/utwdYh3
-    about: Support maintenance by Susant Sahani — not required to use CE
+    about: Support maintenance by Susant Sahani
   - name: "Watch platform demo"
     url: https://zyvor.dev/demo?utm_source=github&utm_medium=cloud-netconfig
     about: Migration video and live dashboard — HyperSDK platform overview
@@ -15,12 +15,12 @@ contact_links:
   - name: "ROI calculator"
     url: https://zyvor.dev/roi?utm_source=github&utm_medium=cloud-netconfig
     about: Estimate migration and infrastructure savings
-  - name: "CE vs Enterprise"
+  - name: "Enterprise license"
     url: https://github.com/hypersdk/cloud-netconfig/blob/main/docs/enterprise.md
-    about: When to use GitHub vs contact Zyvor for production
+    about: How to get a license and support from Zyvor
   - name: "Discussions"
     url: https://github.com/hypersdk/cloud-netconfig/discussions
-    about: Community questions and ideas
+    about: Questions and ideas
   - name: "Security"
     url: https://github.com/hypersdk/cloud-netconfig/blob/main/SECURITY.md
     about: Report vulnerabilities privately

@@ -15,7 +15,7 @@
 
 ### Secondary IPs and routes. Configured from metadata.
 
-**Automatic network configuration for cloud instances using provider metadata (Azure, AWS, GCP, and others).** Handles secondary IPs, routing tables, and policy-based routing on multi-interface VMs. Community Edition daemon from the Zyvor Platform suite — runs unprivileged with `CAP_NET_ADMIN`.
+**Automatic network configuration for cloud instances using provider metadata (Azure, AWS, GCP, and others).** Handles secondary IPs, routing tables, and policy-based routing on multi-interface VMs. Daemon from the Zyvor Platform suite — runs unprivileged with `CAP_NET_ADMIN`.
 
 **Azure · AWS EC2 · GCP metadata** · **Policy routing per NIC** · **Netlink-native, Rust** · **Unprivileged, CAP_NET_ADMIN** · **deb · rpm · Arch packages**
 
@@ -144,16 +144,16 @@ User guides: [docs/user/README.md](docs/user/README.md).
 
 ## Maturity
 
-Version **0.3.1** (Community Edition, see [releases](https://github.com/zyvorai/zyvor-cloud-netconfig/releases)). Reconfiguration is driven by the periodic metadata refresh; subscribing to netlink link and address events is not implemented yet (`src/provider/watch.rs` is a placeholder).
+Version **0.3.1** (see [releases](https://github.com/zyvorai/zyvor-cloud-netconfig/releases)). Reconfiguration is driven by the periodic metadata refresh; subscribing to netlink link and address events is not implemented yet (`src/provider/watch.rs` is a placeholder).
 
 ## Enterprise
 
-| | Community Edition (this repo) | Enterprise ([zyvor.dev](https://zyvor.dev/?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_edition)) |
-|---|------------------------------|--------------------------------------------------------------------------------------------|
-| **Support** | [GitHub Issues](https://github.com/zyvorai/zyvor-cloud-netconfig/issues) | SLA, [sales@zyvor.dev](mailto:sales@zyvor.dev), professional services |
-| **Scope** | Source-available daemon | Supported multi-cloud production rollouts |
-| **Features** | Multi-cloud metadata clients, metadata-driven reconfiguration, policy-based routing | Same codebase + fleet automation and rollout support |
-| **Platform** | cloud-netconfig | Zyvor Platform migration and operations suite |
+| | Enterprise ([zyvor.dev](https://zyvor.dev/?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_edition)) |
+|---|---|
+| **Support** | SLA, [sales@zyvor.dev](mailto:sales@zyvor.dev), professional services |
+| **Scope** | Supported multi-cloud production rollouts |
+| **Features** | Multi-cloud metadata clients, metadata-driven reconfiguration, policy-based routing; Same codebase + fleet automation and rollout support |
+| **Platform** | Zyvor Platform migration and operations suite |
 
 | | |
 |---|---|
@@ -162,7 +162,7 @@ Version **0.3.1** (Community Edition, see [releases](https://github.com/zyvorai/
 | **Pricing** | [zyvor.dev/pricing](https://zyvor.dev/pricing?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_edition) |
 | **Contact** | [zyvor.dev/contact](https://zyvor.dev/contact?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_edition) · [sales@zyvor.dev](mailto:sales@zyvor.dev) |
 
-Community Edition is the source-available daemon. Supported multi-cloud rollouts, SLAs, and Zyvor Platform migration integration → contact Zyvor (not GitHub Issues). Details: [docs/enterprise.md](docs/enterprise.md).
+Supported multi-cloud rollouts, SLAs, and Zyvor Platform migration integration → contact Zyvor (not GitHub Issues). Details: [docs/enterprise.md](docs/enterprise.md).
 
 ---
 
@@ -181,11 +181,11 @@ Community Edition is the source-available daemon. Supported multi-cloud rollouts
 
 ## Support the project
 
-cloud-netconfig Community Edition is source-available, maintained by **Susant Sahani** · [Zyvor AI Labs](https://zyvor.dev/?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer)
+cloud-netconfig is source-available, maintained by **Susant Sahani** · [Zyvor AI Labs](https://zyvor.dev/?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer)
 
 - **Enterprise / production:** [zyvor.dev/contact](https://zyvor.dev/contact?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer) · [sales@zyvor.dev](mailto:sales@zyvor.dev)
 - **Demo and PoC:** [Book a demo](https://zyvor.dev/schedule?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer) · [30-day PoC](https://zyvor.dev/poc?utm_source=github&utm_medium=cloud-netconfig&utm_campaign=readme_footer)
-- **Community help:** [GitHub Issues](https://github.com/zyvorai/zyvor-cloud-netconfig/issues)
+- **Issues:** [GitHub Issues](https://github.com/zyvorai/zyvor-cloud-netconfig/issues)
 
 ## License
 
