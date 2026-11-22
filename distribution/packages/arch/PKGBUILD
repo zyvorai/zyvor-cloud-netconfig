@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-2.0
 # Maintainer: ZyvorAI Labs Private Limited <legal@zyvor.dev>
 
 pkgname=cloud-netconfig
@@ -7,7 +7,7 @@ pkgrel=1
 pkgdesc="Cloud instance network configuration daemon"
 arch=('x86_64' 'aarch64')
 url="https://github.com/ssahani/cloud-netconfig"
-license=('custom:LicenseRef-Zyvor-Production-1.0')
+license=('custom:LicenseRef-Zyvor-Production-2.0')
 depends=('systemd')
 makedepends=('cargo' 'rust')
 backup=('etc/cloud-network/config.yaml')

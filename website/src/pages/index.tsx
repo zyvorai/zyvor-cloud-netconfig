@@ -1,5 +1,5 @@
 // Copyright 2026 Zyvor AI Labs · https://zyvor.dev
-// SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+// SPDX-License-Identifier: LicenseRef-Zyvor-Production-2.0
 
 import type {ReactNode} from 'react';
 import clsx from 'clsx';
@@ -87,7 +87,7 @@ function TrustBand() {
               Source-available
             </Heading>
             <p>
-              Daemon under the Zyvor Production License, maintained by Zyvor AI Labs.
+              Daemon under the Zyvor Production Licence, maintained by Zyvor AI Labs.
               Runs unprivileged with <code>CAP_NET_ADMIN</code> rather than
               full root. Enterprise adds fleet automation, SLAs, and
               HyperSDK migration/operations integration on the same
@@ -102,7 +102,7 @@ function TrustBand() {
             />
             <img
               src="https://img.shields.io/badge/license-Zyvor%20Production%201.0-blue.svg"
-              alt="Zyvor Production License v1.0"
+              alt="Zyvor Production Licence v2.0"
             />
           </div>
         </Reveal>

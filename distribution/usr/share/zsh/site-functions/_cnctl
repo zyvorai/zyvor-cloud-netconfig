@@ -1,5 +1,5 @@
 #compdef cnctl
-# SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+# SPDX-License-Identifier: LicenseRef-Zyvor-Production-2.0
 # zsh completion for cnctl
 
 _cnctl() {
