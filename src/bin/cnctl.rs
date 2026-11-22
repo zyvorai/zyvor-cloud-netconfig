@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: LicenseRef-Zyvor-Production-1.0
+// SPDX-License-Identifier: LicenseRef-Zyvor-Production-2.0
 
 use clap::{Parser, Subcommand};
 use cloud_netconfig::*;
@@ -247,7 +247,7 @@ async fn main() -> anyhow::Result<()> {
 
         Commands::Version => {
             println!("cnctl version {}", conf::VERSION);
-            println!("License:        Zyvor Production License v1.0");
+            println!("License:        Zyvor Production Licence v2.0");
         }
     }
 
